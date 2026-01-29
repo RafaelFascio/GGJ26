@@ -25,12 +25,13 @@ public class FeatherProyectile : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+
         if (other.gameObject.CompareTag("Enemy"))
         {
-            
-            //Hago daño
-           
+            Debug.Log("Feather hit an enemy!");
+            Enemy enemy = other.gameObject.GetComponent<Enemy>();
+            enemy.TakeDamage(damage);
+            Destroy(gameObject);
         }
-        //    Destroy(gameObject);
     }
 }

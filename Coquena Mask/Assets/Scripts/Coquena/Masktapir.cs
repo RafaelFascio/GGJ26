@@ -10,7 +10,7 @@ Embestida del espíritu del Monte: Embiste rápidamente un área seleccionada, haci
 */
 public class Masktapir : Mask
 {
-    
+    Pisoton pisoton;
     public override void Attack()
     {
         if (nextAttackTime + attackRate < Time.time)
@@ -30,7 +30,7 @@ public class Masktapir : Mask
 
     public override void UseFirstAbility()
     {
-        Debug.Log("Tapir First Ability");
+        pisoton.Activate();
     }
 
     public override void UseSecondAbility()
@@ -51,6 +51,7 @@ public class Masktapir : Mask
     {
         player = GetComponentInParent<PlayerScript>();
         hitbox = GetComponent<Collider>();
+        pisoton = GetComponent<Pisoton>();
         attackRate = 0.5f;
         attacking = false;
         attackDuration = 0.3f;

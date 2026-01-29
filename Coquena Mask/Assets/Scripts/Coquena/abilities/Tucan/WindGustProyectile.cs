@@ -29,8 +29,13 @@ public class WindGustProyectile : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
+            Debug.Log("Tornado hit an enemy!");
+            Enemy enemy = other.gameObject.GetComponent<Enemy>();
+            enemy.TakeDamage(damage);
+            
             //Hago daño
+            //Slow
         }
-        
+
     }
 }

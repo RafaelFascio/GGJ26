@@ -4,32 +4,35 @@ using UnityEngine;
 public class TornadoProyectile : MonoBehaviour
 {
     [HideInInspector] public Vector3 direction;
-    [HideInInspector] public float proyectileSpeed;
+    [HideInInspector] public float tornadoSpeed;
     [HideInInspector] public float damage;
-    float duration;
+    [HideInInspector] public float slowAmount;
+    [HideInInspector] public float slowDuration;
+    [HideInInspector] public float tornadoDuration;
     void Start()
     {
-        proyectileSpeed = 15f;
-        damage = 20f;
-        duration = 2f;
+       
         StartCoroutine(DestroyAfterTime());
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position += Time.deltaTime * proyectileSpeed * direction;
+        transform.position += Time.deltaTime * tornadoSpeed * direction;
     }
     IEnumerator DestroyAfterTime()
     {
-        yield return new WaitForSeconds(duration);
+        yield return new WaitForSeconds(tornadoDuration);
         Destroy(gameObject);
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-
+            Debug.Log("Tornado hit an enemy!");
+            Enemy enemy = other.gameObject.GetComponent<Enemy>();
+            enemy.TakeDamage(damage);
+            enemy.ApplySlow(slowAmount, slowDuration);
             //Hago daño
             //Slow
         }

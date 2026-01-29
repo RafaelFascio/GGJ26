@@ -87,6 +87,6 @@ public class MaskTucan : Mask
     }
     private void OnTriggerEnter(Collider other)
     {
-        
+        // ataque en picada conecta
     }
 }
