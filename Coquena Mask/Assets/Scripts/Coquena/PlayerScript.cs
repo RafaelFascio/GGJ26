@@ -24,9 +24,13 @@ public class PlayerScript : MonoBehaviour
     float moveSpeed;
     int maskIndex;
     float stunresist;
-
     #endregion
 
+    public enum State 
+    {
+        Idle,Moving,Stunned,Casting
+    }
+    public State currentState;
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
@@ -37,7 +41,7 @@ public class PlayerScript : MonoBehaviour
     }
     void Start()
     {
-
+        currentState = State.Idle;
         maskIndex = 0;
         ChangeMask(maskIndex);
         move = GetComponent<Move>();
@@ -48,7 +52,7 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
        
-        if (!currentMask.isAtacking()) 
+        if (currentState !=State.Casting && currentState != State.Stunned) 
         {
             move.MoveCharacter(moveSpeed);
             if (attack.triggered)

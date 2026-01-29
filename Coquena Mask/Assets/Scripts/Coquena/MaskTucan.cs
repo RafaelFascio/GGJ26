@@ -12,7 +12,8 @@ public class MaskTucan : Mask
     public GameObject featherPrefab;
     public GameObject windGustPrefab;
     public Transform spawnpoint;
-
+    PicoPerforador picoPerforadorAbility;
+    AleteoEspírituViento aleteoAbility;
     public override void Attack()
     {
       if (nextAttackTime + attackRate < Time.time)
@@ -46,12 +47,12 @@ public class MaskTucan : Mask
 
     public override void UseFirstAbility()
     {
-        Debug.Log("Tucan First Ability");
+        picoPerforadorAbility.Activate(); 
     }
 
     public override void UseSecondAbility()
     {
-        Debug.Log("Tucan Second Ability");
+        aleteoAbility.Activate();
     }
 
     private void OnEnable()
@@ -71,7 +72,9 @@ public class MaskTucan : Mask
         attacking = false;
         attackDuration = 0.3f;
         attackDamage = 10;
-        
+        picoPerforadorAbility = GetComponent<PicoPerforador>();
+        aleteoAbility = GetComponent<AleteoEspírituViento>();
+
     }
 
     

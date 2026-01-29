@@ -9,7 +9,9 @@ Tecla Espacio habilitado para esquivar (dash)
 */
 public class MaskYaguarete : Mask
 {
-    
+    float bleedDuration = 5f;
+    float bleedDamagePerTick = 2f;
+    float bleedTickInterval = 1f;
     public override void Attack()
     {
         if (nextAttackTime + attackRate < Time.time)
@@ -18,8 +20,8 @@ public class MaskYaguarete : Mask
             player.move.TurnToMouse();
             StartCoroutine(EnableHitCollider());
             nextAttackTime = Time.time;
-
-            //attacking = true;
+            
+            
         }
         else
         {
@@ -45,6 +47,7 @@ public class MaskYaguarete : Mask
         nextAttackTime = 0f;
         attackCount = 0;
         hitbox.enabled = false;
+        
 
     }
     private void Awake()
@@ -62,6 +65,18 @@ public class MaskYaguarete : Mask
     {
         return attacking;
     }
-    
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy")) 
+        {
+            Enemy enemy = other.GetComponent<Enemy>();
+            enemy.TakeDamage(attackDamage);
+            
+            if (attackCount >=3) 
+            {
+                enemy.ApplyDamageOverTime(bleedDamagePerTick, bleedDuration, bleedTickInterval);               
+            }
+        }
+    }
 }

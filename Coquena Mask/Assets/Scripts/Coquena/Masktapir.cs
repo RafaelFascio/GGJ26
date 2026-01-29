@@ -16,7 +16,7 @@ public class Masktapir : Mask
         if (nextAttackTime + attackRate < Time.time)
         {
             attackCount++;
-            player.move.TurnToMouse();
+           // player.move.TurnToMouse();
             StartCoroutine(EnableHitCollider());
             nextAttackTime = Time.time;
             
@@ -59,16 +59,15 @@ public class Masktapir : Mask
     
     private void OnTriggerEnter(Collider other)
     {
-        if (attacking && other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy"))
         {
-            //hago daño al enemigo
+            Enemy enemy = other.GetComponent<Enemy>();
+            enemy.TakeDamage(attackDamage);
 
-            if (attackCount >= 3) 
+            if (attackCount >= 3)
             {
-               //aturde al enemigo
-               
+             //   enemy.ApplyDamageOverTime();
             }
-            
         }
     }
 

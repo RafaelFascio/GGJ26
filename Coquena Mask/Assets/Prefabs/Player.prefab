@@ -223,6 +223,7 @@ GameObject:
   - component: {fileID: 2905265559941204546}
   - component: {fileID: 4036977626067959678}
   - component: {fileID: 3716229043791615050}
+  - component: {fileID: 5660661172542835965}
   m_Layer: 0
   m_Name: modo tucan
   m_TagString: Untagged
@@ -293,6 +294,27 @@ CapsuleCollider:
   m_Height: 1.76
   m_Direction: 2
   m_Center: {x: 0, y: 0.54, z: 1.09}
+--- !u!114 &5660661172542835965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2205939991623133871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a3ed1d6a2b2da74e9c5b1f4b566c391, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PicoPerforador
+  player: {fileID: 0}
+  Abilityname: 
+  description: 
+  icon: {fileID: 0}
+  cooldown: 0
+  timer: 0
+  isUsable: 0
+  cost: 0
+  damage: 0
 --- !u!1 &3670920569272972001
 GameObject:
   m_ObjectHideFlags: 0
@@ -769,7 +791,7 @@ Transform:
   m_GameObject: {fileID: 8678151979687421647}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.70981663, z: 0, w: 0.70438653}
-  m_LocalPosition: {x: 8.5, y: 0.996, z: 15.62}
+  m_LocalPosition: {x: 29.23, y: 0.97, z: 17.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -795,7 +817,7 @@ CharacterController:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Height: 2
   m_Radius: 0.5
@@ -856,10 +878,10 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!136 &4493070299417617232
 CapsuleCollider:
