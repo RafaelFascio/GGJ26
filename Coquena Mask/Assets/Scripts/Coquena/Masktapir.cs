@@ -11,13 +11,15 @@ Embestida del espíritu del Monte: Embiste rápidamente un área seleccionada, haci
 public class Masktapir : Mask
 {
     Pisoton pisoton;
+    EmbestidaEspiritu embestida;
+    float damageResist = 0.25f; //25% de resistencia al daño
     public override void Attack()
     {
         if (nextAttackTime + attackRate < Time.time)
         {
             attackCount++;
            // player.move.TurnToMouse();
-            StartCoroutine(EnableHitCollider());
+            StartCoroutine(EnableHitCollider(attackDuration));
             nextAttackTime = Time.time;
             
             //attacking = true;
@@ -35,7 +37,7 @@ public class Masktapir : Mask
 
     public override void UseSecondAbility()
     {
-        Debug.Log("Tapir Second Ability");
+        embestida.Activate();
     }
 
     private void OnEnable()
@@ -45,17 +47,25 @@ public class Masktapir : Mask
         nextAttackTime = 0f;
         attackCount = 0;
         hitbox.enabled = false;
+        player.damageresist += damageResist;
 
+    }
+    
+    private void OnDisable()
+    {
+        player.damageresist -= damageResist;
     }
     private void Awake()
     {
         player = GetComponentInParent<PlayerScript>();
         hitbox = GetComponent<Collider>();
         pisoton = GetComponent<Pisoton>();
+        embestida = GetComponent<EmbestidaEspiritu>();
         attackRate = 0.5f;
         attacking = false;
         attackDuration = 0.3f;
         attackDamage = 10;
+        damageResist = 0.25f;
     }
     
     private void OnTriggerEnter(Collider other)
@@ -63,12 +73,22 @@ public class Masktapir : Mask
         if (other.CompareTag("Enemy"))
         {
             Enemy enemy = other.GetComponent<Enemy>();
-            enemy.TakeDamage(attackDamage);
+            
 
-            if (attackCount >= 3)
+            if (player.currentState == PlayerScript.State.Casting) //el trigger se activo durante una habilidad
+
             {
-             //   enemy.ApplyDamageOverTime();
-            }
+                Debug.Log("enemigo Embestido");
+                enemy.TakeDamage(embestida.chargeDamage);
+               // enemy.ApplyStun(embestida.stunDuration);
+            }else //el trigger se activo durante un ataque normal
+            {
+                enemy.TakeDamage(attackDamage);
+                if (attackCount >= 3)
+                {
+                    //   estuneo por ataque(); 
+                }
+            }           
         }
     }
 

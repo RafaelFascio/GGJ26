@@ -4,7 +4,7 @@ public class PicoPerforador : Ability
 {
     public float speedBuff;
     public int damage;
-    public float range;
+    public float detectionRadius;
     CharacterController controller;
     public override void Use()
     {
@@ -13,17 +13,20 @@ public class PicoPerforador : Ability
     }
     private void Awake()
     {
+        
         player = GetComponentInParent<PlayerScript>();
         controller = GetComponentInParent<CharacterController>();
         Abilityname = "Pico Perforador";
-        damage = 50;
+        damage = 70;
         description = "Se lanza sobre un enemigo y lo atraviesa con el pico causando "+ damage + " daño";
         cooldown = 10f;
         timer = 0f;
         isUsable = true;
         cost = 10;
         speedBuff =30;
-        range = 5f;
+        detectionRadius = 5f;
+        
 
     }
+
 }

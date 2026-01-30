@@ -12,13 +12,14 @@ public class MaskYaguarete : Mask
     float bleedDuration = 5f;
     float bleedDamagePerTick = 2f;
     float bleedTickInterval = 1f;
+    CaceriaEspiritu caceriaEspiritu;
     public override void Attack()
     {
         if (nextAttackTime + attackRate < Time.time)
         {
             attackCount++;
             player.move.TurnToMouse();
-            StartCoroutine(EnableHitCollider());
+            StartCoroutine(EnableHitCollider(attackDuration));
             nextAttackTime = Time.time;
             
             
@@ -36,8 +37,8 @@ public class MaskYaguarete : Mask
 
     public override void UseSecondAbility()
     {
-        throw new System.NotImplementedException();
-        
+        caceriaEspiritu.Activate();
+
     }
 
     private void OnEnable()
@@ -47,14 +48,19 @@ public class MaskYaguarete : Mask
         nextAttackTime = 0f;
         attackCount = 0;
         hitbox.enabled = false;
-        
+        player.canDash = true;
 
+    }
+    private void OnDisable()
+    {
+        player.canDash = false;
     }
     private void Awake()
     {
         
         player = GetComponentInParent<PlayerScript>();
         hitbox = GetComponent<Collider>();
+        caceriaEspiritu = GetComponent<CaceriaEspiritu>();
         attackRate = 0.5f;
         attacking = false;
         attackDuration = 0.3f;
@@ -72,7 +78,7 @@ public class MaskYaguarete : Mask
         {
             Enemy enemy = other.GetComponent<Enemy>();
             enemy.TakeDamage(attackDamage);
-            
+                        
             if (attackCount >=3) 
             {
                 enemy.ApplyDamageOverTime(bleedDamagePerTick, bleedDuration, bleedTickInterval);               

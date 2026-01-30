@@ -14,6 +14,7 @@ public class Move : MonoBehaviour
     #endregion
     Vector3 input = new Vector3(0, 0, 0);
     bool flying = false;
+    float timeFlying = 0f;
 
     private void Awake()
     {
@@ -23,6 +24,7 @@ public class Move : MonoBehaviour
     }
     public void MoveCharacter(float speed)
     {
+        
         input.x = move.ReadValue<Vector2>().x;
         input.z = move.ReadValue<Vector2>().y;
         direction = SetDirection();
@@ -34,12 +36,16 @@ public class Move : MonoBehaviour
         {
             if (!controller.isGrounded)
             {
-                direction.y -= 9.81f * Time.deltaTime;
+                direction.y -= 10f * (Time.deltaTime +timeFlying) ;
+                timeFlying += Time.deltaTime;
             }
             else
             {
                 direction.y = 0;
+                timeFlying = 0f;
             }
+
+            
 
         }
         //   Debug.Log(controller.isGrounded);
