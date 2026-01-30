@@ -27,12 +27,12 @@ public abstract class Mask :MonoBehaviour
     public abstract void UseFirstAbility();
     public abstract void UseSecondAbility();
     public abstract bool isAtacking();
-    public IEnumerator EnableHitCollider()
+    public IEnumerator EnableHitCollider(float duration)
     {
 
         attacking = true;
         hitbox.enabled = true;
-        yield return new WaitForSeconds(attackDuration);
+        yield return new WaitForSeconds(duration);
         hitbox.enabled = false;
         attacking = false;
         if (attackCount >= 3)
