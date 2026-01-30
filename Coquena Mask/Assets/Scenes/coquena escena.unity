@@ -1309,6 +1309,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 113068726539154515, guid: b8897e8ef69e39d4bb5a5627e4727b65, type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1428196463778247608, guid: b8897e8ef69e39d4bb5a5627e4727b65, type: 3}
       propertyPath: m_LocalPosition.x
       value: 29.23
@@ -1356,9 +1360,13 @@ PrefabInstance:
     - target: {fileID: 3354418382278580901, guid: b8897e8ef69e39d4bb5a5627e4727b65, type: 3}
       propertyPath: 'masks.Array.data[0]'
       value: 
-      objectReference: {fileID: 1198198997}
+      objectReference: {fileID: 1433001009}
     - target: {fileID: 3354418382278580901, guid: b8897e8ef69e39d4bb5a5627e4727b65, type: 3}
       propertyPath: 'masks.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1198198997}
+    - target: {fileID: 3354418382278580901, guid: b8897e8ef69e39d4bb5a5627e4727b65, type: 3}
+      propertyPath: 'masks.Array.data[2]'
       value: 
       objectReference: {fileID: 572814336}
     - target: {fileID: 3716229043791615050, guid: b8897e8ef69e39d4bb5a5627e4727b65, type: 3}
@@ -1578,6 +1586,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1433001009 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7316351239214499727, guid: b8897e8ef69e39d4bb5a5627e4727b65, type: 3}
+  m_PrefabInstance: {fileID: 691315427}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
