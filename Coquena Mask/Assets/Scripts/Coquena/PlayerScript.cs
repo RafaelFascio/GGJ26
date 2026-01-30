@@ -45,12 +45,14 @@ public class PlayerScript : MonoBehaviour
     public State currentState;
     private void Awake()
     {
-        controller = GetComponent<CharacterController>();
+        move = GetComponent<Move>();
+        controller = GetComponent<CharacterController>();       
         changeMask = InputSystem.actions.FindAction("ChangeMask");
         attack = InputSystem.actions.FindAction("Attack");
         useAbility1 = InputSystem.actions.FindAction("UseAbility1");
         useAbility2 = InputSystem.actions.FindAction("UseAbility2");
         dash = InputSystem.actions.FindAction("Dash");
+        
     }
     void Start()
     {
@@ -59,7 +61,6 @@ public class PlayerScript : MonoBehaviour
         currentState = State.Idle;
         maskIndex = 0;
         ChangeMask(maskIndex);
-        move = GetComponent<Move>();
         moveSpeed = 7.0f;
         canMove =true;
         canAttack = true;
@@ -72,7 +73,7 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
 
-        if (currentState != State.Stunned)
+        if (currentState != State.Stunned )
         {
             if (dash.triggered && canDash)
             {

@@ -9,6 +9,7 @@ public class FeatherProyectile : MonoBehaviour
     float duration;
     private void Start()
     {
+        direction.Normalize();
         proyectileSpeed = 15f;
         damage = 10f;
         duration = 2f;
@@ -16,7 +17,8 @@ public class FeatherProyectile : MonoBehaviour
     }
     private void Update()
     {
-        transform.position += proyectileSpeed * Time.deltaTime * direction.normalized;
+        
+        transform.position += proyectileSpeed * Time.deltaTime * direction;
     }
     IEnumerator DestroyAfterTime()
     {
