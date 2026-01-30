@@ -15,7 +15,8 @@ public class AleteoEspírituViento : Ability
     public override void Use()
     {
         player.currentState = PlayerScript.State.Casting;
-        direction = player.move.GetLookDirection();
+        direction = player.move.MousePosition()-spawnPoint.position;
+        direction.Normalize();
         TornadoProyectile script = Instantiate(tornadoPrefab, spawnPoint.position, spawnPoint.rotation).GetComponent<TornadoProyectile>();
         script.direction = direction;      
         script.damage = damage;
