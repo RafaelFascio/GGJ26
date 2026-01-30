@@ -16,6 +16,7 @@ public class Move : MonoBehaviour
     Vector3 input = new Vector3(0, 0, 0);
     public LayerMask groundMask;
     public bool flying;
+    public float gravity;
     float targetHeight;
     float verticalVelocity;
     float currentHeight = 0f;
@@ -24,6 +25,7 @@ public class Move : MonoBehaviour
 
     private void Awake()
     {
+        gravity = 10f;
         flying = false;
         cameraTransform = Camera.main.transform;
         controller = GetComponent<CharacterController>();
@@ -45,7 +47,7 @@ public class Move : MonoBehaviour
         {
             if (!controller.isGrounded)
             {
-                direction.y -= 10f * (Time.deltaTime + timeFlying);
+                direction.y -= gravity * (Time.deltaTime + timeFlying);
                 timeFlying += Time.deltaTime;
             }
             else
