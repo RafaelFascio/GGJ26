@@ -78,10 +78,11 @@ public class MaskYaguarete : Mask
         {
             Enemy enemy = other.GetComponent<Enemy>();
             enemy.TakeDamage(attackDamage);
-                        
-            if (attackCount >=3) 
+            enemy.yaguareteHitCount++;
+            if (enemy.yaguareteHitCount >=3) 
             {
-                enemy.ApplyDamageOverTime(bleedDamagePerTick, bleedDuration, bleedTickInterval);               
+                enemy.ApplyDamageOverTime(bleedDamagePerTick, bleedDuration, bleedTickInterval);  
+                enemy.yaguareteHitCount = 0;
             }
         }
     }

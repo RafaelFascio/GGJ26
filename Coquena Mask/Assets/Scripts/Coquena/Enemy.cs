@@ -6,7 +6,7 @@ public abstract class Enemy : MonoBehaviour
     public float maxHp;
     public float currentHp;
     public float speed;
-    
+    public int yaguareteHitCount;
     public virtual void TakeDamage(float damage)
     {
         currentHp -= damage;

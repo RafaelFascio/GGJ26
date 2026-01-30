@@ -12,15 +12,24 @@ public class Move : MonoBehaviour
     
     InputAction move;
     #endregion
+    
     Vector3 input = new Vector3(0, 0, 0);
-    bool flying = false;
+    public LayerMask groundMask;
+    public bool flying;
+    float targetHeight;
+    float verticalVelocity;
+    float currentHeight = 0f;
     float timeFlying = 0f;
+
 
     private void Awake()
     {
+        flying = false;
         cameraTransform = Camera.main.transform;
         controller = GetComponent<CharacterController>();
         move = InputSystem.actions.FindAction("Move");
+        verticalVelocity = 31f;     
+        targetHeight = 7f;
     }
     public void MoveCharacter(float speed)
     {
@@ -36,7 +45,7 @@ public class Move : MonoBehaviour
         {
             if (!controller.isGrounded)
             {
-                direction.y -= 10f * (Time.deltaTime +timeFlying) ;
+                direction.y -= 10f * (Time.deltaTime + timeFlying);
                 timeFlying += Time.deltaTime;
             }
             else
@@ -44,14 +53,31 @@ public class Move : MonoBehaviour
                 direction.y = 0;
                 timeFlying = 0f;
             }
-
-            
-
         }
-        //   Debug.Log(controller.isGrounded);
+        else {  
+               
+                currentHeight = GetCurrentHeight();
+                
+                float heightDifference = targetHeight - currentHeight;
+                
+                direction.y = heightDifference * verticalVelocity *Time.deltaTime;
+             
+        }
+        
         Turn(input);
         controller.Move(direction * Time.deltaTime);
         
+    }
+
+    float GetCurrentHeight()
+    {
+        Ray ray = new Ray(transform.position, Vector3.down);
+        if(Physics.Raycast(ray, out RaycastHit hitInfo, 100,groundMask))
+        {
+            return hitInfo.distance;
+        }
+        else { Debug.Log("no choco con nada"); }
+            return 100;
     }
     Vector3 SetDirection()
     {
@@ -72,6 +98,7 @@ public class Move : MonoBehaviour
             return inputDirection;
         }
     }
+
     public bool IsMoving()
     {
         return input.x != 0 || input.z != 0;
@@ -80,20 +107,38 @@ public class Move : MonoBehaviour
     {    
         if (input.z != 0 || input.x != 0) 
         {
-          transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), Time.deltaTime * 8);
+          transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), Time.deltaTime * 30);
         }    
     }
-   public void TurnToMouse() 
+    
+    public void TurnToMouse()
     {
-        Vector3 lookDirection = GetLookDirection();    
-        transform.rotation = Quaternion.LookRotation(lookDirection);
+        Vector3 lookDirection = GetLookDirection();
+       
+        Vector3 flatLook = new Vector3(lookDirection.x, 0f, lookDirection.z);
+        if (flatLook.sqrMagnitude > 0.0001f)
+        {
+            
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(flatLook), Time.deltaTime * 30f);
+        }
     }
-    public Vector3 GetLookDirection() 
+    public Vector3 GetLookDirection()
     {
         Vector3 objective = MousePosition();
+
+       
         objective.y = transform.position.y;
-        return (objective - transform.position).normalized;
+
+        Vector3 dir = (objective - transform.position);
+        dir.y = 0f; 
+        if (dir.sqrMagnitude < 0.0001f)
+        {
+            
+            return transform.forward;
+        }
+        return dir.normalized;
     }
+   
     public  Vector3 MousePosition()
     {
         Vector3 mousePos = new Vector2(0, 0);
