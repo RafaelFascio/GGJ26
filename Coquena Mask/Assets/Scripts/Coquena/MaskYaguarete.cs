@@ -13,6 +13,9 @@ public class MaskYaguarete : Mask
     float bleedDamagePerTick = 2f;
     float bleedTickInterval = 1f;
     CaceriaEspiritu caceriaEspiritu;
+
+    public ParticleSystem hitImpactVFX;
+
     public override void Attack()
     {
         if (nextAttackTime + attackRate < Time.time)
@@ -21,8 +24,8 @@ public class MaskYaguarete : Mask
             player.move.TurnToMouse();
             StartCoroutine(EnableHitCollider(attackDuration));
             nextAttackTime = Time.time;
-            
-            
+            hitImpactVFX.Play();
+
         }
         else
         {

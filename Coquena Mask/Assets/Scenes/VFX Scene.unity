@@ -856,7 +856,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
   looping: 1
-  prewarm: 0
+  prewarm: 1
   playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -915,7 +915,7 @@ ParticleSystem:
       m_RotationOrder: 4
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
-  scalingMode: 1
+  scalingMode: 0
   randomSeed: 0
   InitialModule:
     serializedVersion: 3
@@ -1411,7 +1411,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 1000
+    maxNumParticles: 200
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -5596,6 +5596,26 @@ Transform:
   - {fileID: 1740994436}
   m_Father: {fileID: 1855349861}
   m_LocalEulerAnglesHint: {x: 30, y: -30, z: 0}
+--- !u!1 &1400820820 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8678151979687421647, guid: b8897e8ef69e39d4bb5a5627e4727b65, type: 3}
+  m_PrefabInstance: {fileID: 1753141370}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1400820826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400820820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 568b72e7e91cbb64490f174ad43d3e1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::JaguarAttack
+  bleedDuration: 5
+  bleedDamage: 2
+  bleedTickRate: 1
 --- !u!1 &1740994435
 GameObject:
   m_ObjectHideFlags: 0
@@ -10545,7 +10565,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8678151979687421647, guid: b8897e8ef69e39d4bb5a5627e4727b65, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1400820826}
   m_SourcePrefab: {fileID: 100100000, guid: b8897e8ef69e39d4bb5a5627e4727b65, type: 3}
 --- !u!1 &1855349857
 GameObject:
@@ -10559,6 +10582,9 @@ GameObject:
   - component: {fileID: 1855349860}
   - component: {fileID: 1855349859}
   - component: {fileID: 1855349858}
+  - component: {fileID: 1855349864}
+  - component: {fileID: 1855349863}
+  - component: {fileID: 1855349862}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -10660,6 +10686,47 @@ Transform:
   - {fileID: 1233716595}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1855349862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855349857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41b00b2b7f501774faaa25d8d49e4803, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BleedEffect
+  damagePerTick: 2
+  tickRate: 1
+  bleedLoopVFX: {fileID: 751059302}
+  bleedTickVFX: {fileID: 1740994438}
+--- !u!114 &1855349863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855349857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2238c77001e4bb34bb7457a563db3b98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  maxHealth: 100
+--- !u!114 &1855349864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855349857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74d8a7af5a2cf374086f8e57d28c74ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StatusEffectController
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
