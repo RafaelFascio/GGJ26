@@ -9,13 +9,11 @@ Tecla Espacio habilitado para esquivar (dash)
 */
 public class MaskYaguarete : Mask
 {
-    float bleedDuration = 5f;
-    float bleedDamagePerTick = 2f;
+    float bleedDuration = 10f;
+    float bleedDamagePerTick = 4f;
     float bleedTickInterval = 1f;
     CaceriaEspiritu caceriaEspiritu;
-
-    public ParticleSystem hitImpactVFX;
-
+    SaltoDepredador salto;
     public override void Attack()
     {
         if (nextAttackTime + attackRate < Time.time)
@@ -24,8 +22,8 @@ public class MaskYaguarete : Mask
             player.move.TurnToMouse();
             StartCoroutine(EnableHitCollider(attackDuration));
             nextAttackTime = Time.time;
-            hitImpactVFX.Play();
-
+            
+            
         }
         else
         {
@@ -35,7 +33,7 @@ public class MaskYaguarete : Mask
 
     public override void UseFirstAbility()
     {
-        throw new System.NotImplementedException();
+       salto.Activate();
     }
 
     public override void UseSecondAbility()
@@ -64,6 +62,7 @@ public class MaskYaguarete : Mask
         player = GetComponentInParent<PlayerScript>();
         hitbox = GetComponent<Collider>();
         caceriaEspiritu = GetComponent<CaceriaEspiritu>();
+        salto = GetComponent<SaltoDepredador>();
         attackRate = 0.5f;
         attacking = false;
         attackDuration = 0.3f;
@@ -81,10 +80,12 @@ public class MaskYaguarete : Mask
         {
             Enemy enemy = other.GetComponent<Enemy>();
             enemy.TakeDamage(attackDamage);
-                        
-            if (attackCount >=3) 
+            enemy.yaguareteHitCount++;
+            if (enemy.yaguareteHitCount >=3) 
             {
-                enemy.ApplyDamageOverTime(bleedDamagePerTick, bleedDuration, bleedTickInterval);               
+                enemy.ApplyDamageOverTime(bleedDamagePerTick, bleedDuration, bleedTickInterval); 
+                Debug.Log("Bleed applied to " + other.name);
+                enemy.yaguareteHitCount = 0;
             }
         }
     }

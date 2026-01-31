@@ -18,12 +18,15 @@ public class MaskTucan : Mask
     {
       if (nextAttackTime + attackRate < Time.time)
       {
-        attackCount++;
-            Vector3 direction = player.move.GetLookDirection();
+            attackCount++;
+            //Vector3 direction = player.move.MousePosition();
+            //la direccion del proyectil es donde impacto el mouse en el mundo 3D
             player.move.TurnToMouse();
+            Vector3 direction = player.move.MousePosition() - spawnpoint.position;
+            direction.Normalize();       
             if (attackCount >= 3)
             {
-                WindGustProyectile script = Instantiate(windGustPrefab, spawnpoint.position, spawnpoint.rotation).GetComponent<WindGustProyectile>();
+                WindGustProyectile script = Instantiate(windGustPrefab, spawnpoint.position, Quaternion.identity).GetComponent<WindGustProyectile>();
                 
                 script.direction = direction;
                 script.damage = attackDamage * 2;
@@ -31,7 +34,7 @@ public class MaskTucan : Mask
             }
             else 
             {
-               FeatherProyectile script = Instantiate(featherPrefab, spawnpoint.position, spawnpoint.rotation).GetComponent<FeatherProyectile>();
+               FeatherProyectile script = Instantiate(featherPrefab, spawnpoint.position, Quaternion.identity).GetComponent<FeatherProyectile>();
                script.direction = direction;
                script.damage = attackDamage;
             }
@@ -56,17 +59,27 @@ public class MaskTucan : Mask
     }
 
     private void OnEnable()
-    {
-        Debug.Log("Tucan Mask Equipped");
+    {   
+        
+        
         attacking = false;
         hitbox.enabled = false;
-        player.currentMask = this;
+        player.currentMask = this;       
         nextAttackTime = 0;
         attackCount = 0;
+        player.move.flying = true;
+    }
+    private void OnDisable()
+    {
+        player.move.flying = false;
+        attacking = false;
+        
     }
     private void Awake()
     {
+        Debug.Log("Tucan Mask Equipped");
         player = GetComponentInParent<PlayerScript>();
+       // player.move = GetComponentInParent<Move>();
         hitbox = GetComponent<Collider>();
         attackRate = 0.5f;
         attacking = false;
@@ -87,6 +100,16 @@ public class MaskTucan : Mask
     }
     private void OnTriggerEnter(Collider other)
     {
-        // ataque en picada conecta
+        if (other.CompareTag("Enemy")) 
+        {
+            Enemy enemy = other.GetComponent<Enemy>();
+            enemy.TakeDamage(picoPerforadorAbility.damage);
+            picoPerforadorAbility.hitObject = true;
+        }
+        else if (other.CompareTag("ground")) 
+        {
+            picoPerforadorAbility.hitObject = true;
+
+        }
     }
 }
