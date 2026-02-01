@@ -96,4 +96,9 @@ public class CamionetaController : Enemy
             Destroy(gameObject); // o desactivar, animar, etc
         }
     }
+
+    public override void Aturdir(float duration)
+    {
+        
+    }
 }

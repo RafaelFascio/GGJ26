@@ -1,7 +1,6 @@
-using Unity.VisualScripting;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 
 public class Move : MonoBehaviour
 {
@@ -38,6 +37,7 @@ public class Move : MonoBehaviour
         
         input.x = move.ReadValue<Vector2>().x;
         input.z = move.ReadValue<Vector2>().y;
+        Debug.Log(move.ReadValue<Vector2>());
         direction = SetDirection();
 
         direction.x *= speed;
