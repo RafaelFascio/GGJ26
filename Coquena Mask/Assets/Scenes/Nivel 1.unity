@@ -119,6 +119,16 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &268065381 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1d07f183311faac479babd003ebfd7f0, type: 3}
+  m_PrefabInstance: {fileID: 1751545246}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &268065382 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1d07f183311faac479babd003ebfd7f0, type: 3}
+  m_PrefabInstance: {fileID: 1751545246}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &451915511
 GameObject:
   m_ObjectHideFlags: 1
@@ -295,6 +305,150 @@ Transform:
   - {fileID: 1960309475}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &712752761
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 712752763}
+  - component: {fileID: 712752762}
+  - component: {fileID: 712752764}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &712752762
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712752761}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.121
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &712752763
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712752761}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 656.8956, y: 4.59108, z: 137.63992}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &712752764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712752761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bfd6449c634ca44bbf4641bf0d10d6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Sonidos
+  source: {fileID: 712752762}
+  disparo: {fileID: 8300000, guid: 5f6465abf8a160b4381729dd51b5ce6c, type: 3}
 --- !u!1 &730864180
 GameObject:
   m_ObjectHideFlags: 0
@@ -765,9 +919,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2976187512965075210, guid: 4dec0541a414998459abfefdb8d5d9d6, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 971042776}
+    - target: {fileID: 2976187512965075210, guid: 4dec0541a414998459abfefdb8d5d9d6, type: 3}
       propertyPath: alertZone
       value: 
       objectReference: {fileID: 782555300}
+    - target: {fileID: 2976187512965075210, guid: 4dec0541a414998459abfefdb8d5d9d6, type: 3}
+      propertyPath: bledPrefab
+      value: 
+      objectReference: {fileID: 1883499548997518371, guid: 92c8f0f342ad09846bb41d5417897eae, type: 3}
+    - target: {fileID: 2976187512965075210, guid: 4dec0541a414998459abfefdb8d5d9d6, type: 3}
+      propertyPath: hitVFXPrefab
+      value: 
+      objectReference: {fileID: 7881300006228382605, guid: a334f70a068fb064fbad9afba021a418, type: 3}
     - target: {fileID: 2976187512965075210, guid: 4dec0541a414998459abfefdb8d5d9d6, type: 3}
       propertyPath: puntoDeDescanso
       value: 
@@ -812,6 +978,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5984786935255101363, guid: 4dec0541a414998459abfefdb8d5d9d6, type: 3}
+      propertyPath: sonidos
+      value: 
+      objectReference: {fileID: 712752764}
     - target: {fileID: 7782375767493268474, guid: 4dec0541a414998459abfefdb8d5d9d6, type: 3}
       propertyPath: m_Name
       value: Cazador_Inexperto con vida (1)
@@ -1083,9 +1253,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2976187512965075210, guid: 4dec0541a414998459abfefdb8d5d9d6, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 971042776}
+    - target: {fileID: 2976187512965075210, guid: 4dec0541a414998459abfefdb8d5d9d6, type: 3}
       propertyPath: alertZone
       value: 
       objectReference: {fileID: 782555300}
+    - target: {fileID: 2976187512965075210, guid: 4dec0541a414998459abfefdb8d5d9d6, type: 3}
+      propertyPath: bledPrefab
+      value: 
+      objectReference: {fileID: 1883499548997518371, guid: 92c8f0f342ad09846bb41d5417897eae, type: 3}
+    - target: {fileID: 2976187512965075210, guid: 4dec0541a414998459abfefdb8d5d9d6, type: 3}
+      propertyPath: hitVFXPrefab
+      value: 
+      objectReference: {fileID: 7881300006228382605, guid: a334f70a068fb064fbad9afba021a418, type: 3}
     - target: {fileID: 2976187512965075210, guid: 4dec0541a414998459abfefdb8d5d9d6, type: 3}
       propertyPath: puntoDeDescanso
       value: 
@@ -1130,6 +1312,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5984786935255101363, guid: 4dec0541a414998459abfefdb8d5d9d6, type: 3}
+      propertyPath: sonidos
+      value: 
+      objectReference: {fileID: 712752764}
     - target: {fileID: 7782375767493268474, guid: 4dec0541a414998459abfefdb8d5d9d6, type: 3}
       propertyPath: m_Name
       value: Cazador_Inexperto con vida (2)
@@ -1382,6 +1568,99 @@ MonoBehaviour:
   m_ObsoleteUseShadowQualitySettings: 0
   m_ObsoleteCustomShadowResolution: 512
   m_ObsoleteContactShadows: 0
+--- !u!1001 &1751545246
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 971042776}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 1d07f183311faac479babd003ebfd7f0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1d07f183311faac479babd003ebfd7f0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.59
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1d07f183311faac479babd003ebfd7f0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1d07f183311faac479babd003ebfd7f0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1d07f183311faac479babd003ebfd7f0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1d07f183311faac479babd003ebfd7f0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1d07f183311faac479babd003ebfd7f0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1d07f183311faac479babd003ebfd7f0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1d07f183311faac479babd003ebfd7f0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1d07f183311faac479babd003ebfd7f0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8531248215242998404, guid: 1d07f183311faac479babd003ebfd7f0, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a9ef40f23c0d78f4db229879667aa9c7, type: 2}
+    - target: {fileID: -4396642182433536433, guid: 1d07f183311faac479babd003ebfd7f0, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a9ef40f23c0d78f4db229879667aa9c7, type: 2}
+    - target: {fileID: 185045035244966089, guid: 1d07f183311faac479babd003ebfd7f0, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a9ef40f23c0d78f4db229879667aa9c7, type: 2}
+    - target: {fileID: 914469842359168750, guid: 1d07f183311faac479babd003ebfd7f0, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a9ef40f23c0d78f4db229879667aa9c7, type: 2}
+    - target: {fileID: 919132149155446097, guid: 1d07f183311faac479babd003ebfd7f0, type: 3}
+      propertyPath: m_Name
+      value: Coquena_Male Sitting Pose
+      objectReference: {fileID: 0}
+    - target: {fileID: 1630794972795428178, guid: 1d07f183311faac479babd003ebfd7f0, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a9ef40f23c0d78f4db229879667aa9c7, type: 2}
+    - target: {fileID: 2321523695958950486, guid: 1d07f183311faac479babd003ebfd7f0, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a9ef40f23c0d78f4db229879667aa9c7, type: 2}
+    - target: {fileID: 4078362048053641649, guid: 1d07f183311faac479babd003ebfd7f0, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a9ef40f23c0d78f4db229879667aa9c7, type: 2}
+    - target: {fileID: 4112984690662791721, guid: 1d07f183311faac479babd003ebfd7f0, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a9ef40f23c0d78f4db229879667aa9c7, type: 2}
+    - target: {fileID: 6761708314861323176, guid: 1d07f183311faac479babd003ebfd7f0, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a9ef40f23c0d78f4db229879667aa9c7, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1d07f183311faac479babd003ebfd7f0, type: 3}
 --- !u!1001 &1802649244
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1434,6 +1713,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3354418382278580901, guid: b8897e8ef69e39d4bb5a5627e4727b65, type: 3}
+      propertyPath: ghostPrefab
+      value: 
+      objectReference: {fileID: 268065381}
     - target: {fileID: 4493070299417617232, guid: b8897e8ef69e39d4bb5a5627e4727b65, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -1464,7 +1747,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1428196463778247608, guid: b8897e8ef69e39d4bb5a5627e4727b65, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 268065382}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8678151979687421647, guid: b8897e8ef69e39d4bb5a5627e4727b65, type: 3}
       insertIndex: -1
@@ -1605,9 +1891,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2976187512965075210, guid: 4dec0541a414998459abfefdb8d5d9d6, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 971042776}
+    - target: {fileID: 2976187512965075210, guid: 4dec0541a414998459abfefdb8d5d9d6, type: 3}
       propertyPath: alertZone
       value: 
       objectReference: {fileID: 782555300}
+    - target: {fileID: 2976187512965075210, guid: 4dec0541a414998459abfefdb8d5d9d6, type: 3}
+      propertyPath: bledPrefab
+      value: 
+      objectReference: {fileID: 1883499548997518371, guid: 92c8f0f342ad09846bb41d5417897eae, type: 3}
+    - target: {fileID: 2976187512965075210, guid: 4dec0541a414998459abfefdb8d5d9d6, type: 3}
+      propertyPath: hitVFXPrefab
+      value: 
+      objectReference: {fileID: 7881300006228382605, guid: a334f70a068fb064fbad9afba021a418, type: 3}
     - target: {fileID: 2976187512965075210, guid: 4dec0541a414998459abfefdb8d5d9d6, type: 3}
       propertyPath: puntoDeDescanso
       value: 
@@ -1652,6 +1950,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5984786935255101363, guid: 4dec0541a414998459abfefdb8d5d9d6, type: 3}
+      propertyPath: sonidos
+      value: 
+      objectReference: {fileID: 712752764}
     - target: {fileID: 7782375767493268474, guid: 4dec0541a414998459abfefdb8d5d9d6, type: 3}
       propertyPath: m_Name
       value: Cazador_Inexperto con vida
@@ -1682,3 +1984,4 @@ SceneRoots:
   - {fileID: 1571817830}
   - {fileID: 782555302}
   - {fileID: 730864184}
+  - {fileID: 712752763}
