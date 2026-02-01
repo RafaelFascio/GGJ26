@@ -1,15 +1,20 @@
 using System.Collections;
 using UnityEngine;
+using System;
 
 public abstract class Enemy : MonoBehaviour
 {
+    public Action<float> EnemyTakeDamage;
     public float maxHp;
     public float currentHp;
     public float speed;
     public int yaguareteHitCount;
     public virtual void TakeDamage(float damage)
     {
-        currentHp -= damage;
+        float vidaTemporal = currentHp - damage;
+        vidaTemporal = Mathf.Clamp(vidaTemporal, 0, maxHp);
+        currentHp = vidaTemporal;
+        EnemyTakeDamage?.Invoke(currentHp);
         if (currentHp <= 0)
         {
             Die();
