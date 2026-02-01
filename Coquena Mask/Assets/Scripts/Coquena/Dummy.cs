@@ -9,6 +9,4 @@ public class Dummy : Enemy
         currentHp = maxHp;
         speed = 25f;
     }
-    
-
 }
