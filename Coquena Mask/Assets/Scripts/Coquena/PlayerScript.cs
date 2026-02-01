@@ -25,7 +25,7 @@ public class PlayerScript : MonoBehaviour
     #endregion
 
     #region Stats
-    
+
     float moveSpeed;
     int maskIndex;
     float dashSpeed;
@@ -78,7 +78,7 @@ public class PlayerScript : MonoBehaviour
         damageresist = 0f;
         canDash = false;
         dashSpeed = 35f;
-        dashDuration = .4f;       
+        dashDuration = .4f;
         currentMana = maxMana;
         manaRegen = 0.5f;
 
@@ -117,7 +117,6 @@ public class PlayerScript : MonoBehaviour
             if (attack.triggered && canAttack)
             {
                 currentMask.Attack();
-                //animator.SetTrigger("punch");
             }
 
             if (useAbility1.triggered)
@@ -201,6 +200,29 @@ public class PlayerScript : MonoBehaviour
         // Empuja al jugador dependendo de la direcci?n del ataque recibido
         //soonTM
 
+        if (attack.triggered && canAttack)
+        {
+            currentMask.Attack();
+            //animator.SetTrigger("punch");
+        }
+
+        if (useAbility1.triggered)
+        {
+
+            currentMask.UseFirstAbility();
+        }
+        if (useAbility2.triggered)
+        {
+            currentMask.UseSecondAbility();
+        }
+
+        rawScroll = changeMask.ReadValue<Vector2>().y;
+        if (!Mathf.Approximately(rawScroll, 0f) && masks.Count > 0)
+        {
+            int direction = rawScroll > 0f ? 1 : -1; // solo 1 o -1    
+            maskIndex = (maskIndex + direction + masks.Count) % masks.Count;
+            ChangeMask(maskIndex);
+        }
     }
 
     void ChangeMask(int i)

@@ -10,11 +10,14 @@ public abstract class Enemy : MonoBehaviour
     public float speed;
     public int yaguareteHitCount;
     public GameObject hitVFXPrefab;
+    public GameObject bledPrefab;
     private bool isFlashing;
-
+    private Color color;
+    GameObject vfx;
     //private Vector3 hitPoint;
     public virtual void TakeDamage(float damage)
     {
+        //color = Color.white;
         StartCoroutine(HitFlash(GetComponent<Renderer>()));
         float vidaTemporal = currentHp - damage;
         vidaTemporal = Mathf.Clamp(vidaTemporal, 0, maxHp);
@@ -22,7 +25,9 @@ public abstract class Enemy : MonoBehaviour
         EnemyTakeDamage?.Invoke(currentHp);
         if (currentHp <= 0)
         {
+            Destroy(vfx);
             Die();
+
         }
     }
     public virtual void ApplySlow(float amount, float duration)
@@ -31,8 +36,12 @@ public abstract class Enemy : MonoBehaviour
     }
     public virtual void ApplyDamageOverTime(float damagePerTick, float duration, float tick)
     {
+        float dur = duration;
         StartCoroutine(DoDamageOverTime(damagePerTick, duration, tick));
+        SpawnBoodVFX(transform.position, transform.forward, duration); // Removed extra closing parenthesis
     }
+
+
     public virtual void Die()
     {
         Destroy(gameObject);
@@ -45,6 +54,8 @@ public abstract class Enemy : MonoBehaviour
     }
     IEnumerator DoDamageOverTime(float damagePerTick, float duration, float tick)
     {
+        color = Color.red;
+
         float elapsed = 0f;
         do
         {
@@ -59,10 +70,10 @@ public abstract class Enemy : MonoBehaviour
         GameObject vfx = Instantiate(hitVFXPrefab, hitPoint, Quaternion.LookRotation(hitDirection));
         Destroy(vfx, 0.5f);
     }
-    public void SpawnBoodVFX(Vector3 hitPoint, Vector3 hitDirection)
+    public void SpawnBoodVFX(Vector3 hitPoint, Vector3 hitDirection,float duration)
     {
-        GameObject vfx = Instantiate(hitVFXPrefab, hitPoint, Quaternion.LookRotation(hitDirection));
-        Destroy(vfx, 0.5f);
+        vfx = Instantiate(bledPrefab, hitPoint, Quaternion.LookRotation(hitDirection));
+        Destroy(vfx, duration);
     }
     IEnumerator HitFlash(Renderer rend)
     {
@@ -71,7 +82,7 @@ public abstract class Enemy : MonoBehaviour
         isFlashing = true;
 
         Color original = rend.material.color;
-        rend.material.color = Color.white;
+        rend.material.color = color;
 
         yield return new WaitForSeconds(0.08f);
 
@@ -86,6 +97,8 @@ public abstract class Enemy : MonoBehaviour
     {
         if (other.CompareTag("DamageObject"))
         {
+
+            color = Color.white;
             StartCoroutine(HitFlash(GetComponent<Renderer>()));
             SpawnHitVFX(other.ClosestPoint(transform.position), other.transform.forward);
         }
