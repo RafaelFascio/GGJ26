@@ -26,7 +26,7 @@ public class LlamaScript : MonoBehaviour
         shot = InputSystem.actions.FindAction("Dash");
         move = InputSystem.actions.FindAction("Move");
         agent = GetComponent<NavMeshAgent>();
-        agent.updateRotation = false; // controlamos la rotación a mano
+        agent.updateRotation = false; 
         originalRotation = transform.rotation;
     }
 
