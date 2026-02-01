@@ -31,19 +31,9 @@ public abstract class Ability :MonoBehaviour
     {
         if (isUsable)
         {
-            if (player.currentMana > cost)
-            {
-                Use();
-                timer = cooldown;
-                player.currentMana -= cost;
-                player.StartCoroutine(SetCooldown());
-                player.StartCoroutine(player.StartManaRegen());
-            }
-            else 
-            {
-                Debug.Log("Not enough mana to use " + Abilityname + ". Current mana: " + player.currentMana + ", required mana: " + cost);
-            }
-           
+            Use();
+            timer = cooldown;
+            player.StartCoroutine(SetCooldown());
             
         }
         else

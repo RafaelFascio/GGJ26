@@ -12,7 +12,6 @@ public class SaltoDepredador : Ability
     int  hitCount;
     float maxduration;
     Collider[] hitColliders;
-    float stunDuration;
     bool jumping;
     public override void Use()
     {
@@ -36,7 +35,6 @@ public class SaltoDepredador : Ability
         detectionRadius = 2f;
         controller = GetComponentInParent<CharacterController>();
         player = GetComponentInParent<PlayerScript>();
-        stunDuration = 2f;
     }
     IEnumerator Jump() 
 
@@ -64,7 +62,7 @@ public class SaltoDepredador : Ability
         if (hitCount >0) 
         {
             //Aturdir enemigo
-            hitColliders[0].GetComponent<Enemy>().Aturdir(stunDuration);
+            Debug.Log("Enemigo aturdido");
         }
         timer = cooldown;
         player.currentState = PlayerScript.State.Idle;

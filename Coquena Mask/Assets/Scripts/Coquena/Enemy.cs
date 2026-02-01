@@ -23,8 +23,6 @@ public abstract class Enemy : MonoBehaviour
     {
         StartCoroutine(DoDamageOverTime(damagePerTick, duration, tick));
     }
-    public abstract void Aturdir(float duration); 
-   
     public virtual void Die()
     {
         Destroy(gameObject);
@@ -45,5 +43,4 @@ public abstract class Enemy : MonoBehaviour
             elapsed += 1f;
         } while (elapsed < duration);     
     }
-    
 }
