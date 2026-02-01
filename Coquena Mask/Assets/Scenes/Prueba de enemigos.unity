@@ -245,9 +245,9 @@ GameObject:
   - component: {fileID: 106196420}
   - component: {fileID: 106196419}
   - component: {fileID: 106196418}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Cazador_Inexperto
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -264,10 +264,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d68916c23e482d4cb44def2460dff68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CazadorInexperto
-  maxHp: 0
-  currentHp: 0
-  speed: 0
-  yaguareteHitCount: 0
   alertZone: {fileID: 642991339}
   currentState: 0
   agent: {fileID: 106196419}
@@ -523,7 +519,7 @@ GameObject:
   - component: {fileID: 431299318}
   - component: {fileID: 431299317}
   - component: {fileID: 431299316}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Pistola
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -637,7 +633,7 @@ GameObject:
   - component: {fileID: 486493966}
   - component: {fileID: 486493965}
   - component: {fileID: 486493964}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Generador_Disparos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -831,9 +827,9 @@ GameObject:
   - component: {fileID: 726555746}
   - component: {fileID: 726555745}
   - component: {fileID: 726555744}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Cazador_Inexperto (1)
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -850,10 +846,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d68916c23e482d4cb44def2460dff68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CazadorInexperto
-  maxHp: 0
-  currentHp: 0
-  speed: 0
-  yaguareteHitCount: 0
   alertZone: {fileID: 642991339}
   currentState: 0
   agent: {fileID: 726555745}
@@ -1469,7 +1461,7 @@ GameObject:
   - component: {fileID: 1081164754}
   - component: {fileID: 1081164753}
   - component: {fileID: 1081164752}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Pistola
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1725,7 +1717,7 @@ GameObject:
   - component: {fileID: 1756393860}
   - component: {fileID: 1756393859}
   - component: {fileID: 1756393858}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Generador_Disparos
   m_TagString: Untagged
   m_Icon: {fileID: 0}

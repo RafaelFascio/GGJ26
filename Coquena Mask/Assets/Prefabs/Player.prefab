@@ -318,11 +318,6 @@ MonoBehaviour:
   speedBuff: 0
   damage: 0
   detectionRadius: 0
-  maxduration: 0
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 0
-  hitObject: 0
 --- !u!114 &7010852307915383047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -663,7 +658,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3204642746346029944
 Transform:
   m_ObjectHideFlags: 0
@@ -766,9 +761,6 @@ MonoBehaviour:
   timer: 0
   isUsable: 0
   cost: 0
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!1 &8245895672521165626
 GameObject:
   m_ObjectHideFlags: 0
@@ -992,11 +984,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a16acddf40a201f4bb674042f857ed29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Move
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 0
-  flying: 0
-  gravity: 0
 --- !u!54 &4614738024001346178
 Rigidbody:
   m_ObjectHideFlags: 0
