@@ -37,6 +37,8 @@ public class PlayerScript : MonoBehaviour
     [HideInInspector] public bool canbeDamaged;
     [HideInInspector] public bool canDash;
     #endregion
+    public GameObject ghostPrefab;
+    TrailRenderer trailRenderer;
 
     public enum State 
     {
@@ -52,7 +54,8 @@ public class PlayerScript : MonoBehaviour
         useAbility1 = InputSystem.actions.FindAction("UseAbility1");
         useAbility2 = InputSystem.actions.FindAction("UseAbility2");
         dash = InputSystem.actions.FindAction("Dash");
-        
+        trailRenderer = GetComponent<TrailRenderer>();
+
     }
     void Start()
     {
@@ -69,6 +72,7 @@ public class PlayerScript : MonoBehaviour
         canDash = false;
         dashSpeed = 35f;
         dashDuration = .4f; 
+
     }
     void Update()
     {
@@ -77,6 +81,7 @@ public class PlayerScript : MonoBehaviour
         {
             if (dash.triggered && canDash)
             {
+
                 Dash();
             }
             if (canMove) 
@@ -110,8 +115,9 @@ public class PlayerScript : MonoBehaviour
     }
     void Dash() 
     {     
-        if (dashTimer > 0f) return; 
+        if (dashTimer > 0f) return;
         StartCoroutine(StartDash());
+
     }
     IEnumerator StartDash() 
     {
@@ -119,13 +125,17 @@ public class PlayerScript : MonoBehaviour
         canAttack = false;
         currentState = State.Dashing;
         float elapsed = 0f;
-        
+
         while (elapsed < dashDuration) 
         {
             controller.Move(transform.forward * dashSpeed * Time.deltaTime);
+            SpawnAfterImage();
             elapsed += Time.deltaTime;
             yield return null;
         }
+        
+        trailRenderer.emitting = false;
+        ghostPrefab.SetActive(false);
         canMove = true;
         canAttack = true;
         currentState = State.Idle;
@@ -183,4 +193,14 @@ public class PlayerScript : MonoBehaviour
             }
         }
     }
+    void SpawnAfterImage()
+
+{
+        trailRenderer.emitting = true;
+        ghostPrefab.SetActive(true);
+
+        GameObject ghost = Instantiate(ghostPrefab, transform.position, transform.rotation);
+    Destroy(ghost, 0.2f);
+}
+
 }
