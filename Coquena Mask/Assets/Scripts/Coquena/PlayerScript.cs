@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerScript : MonoBehaviour
 {
+    public Action<int> playerTakeDamage;
+    public ManagerScript manager;
     public GameObject ghostPrefab;
     TrailRenderer trailRenderer;
     //public Animator animator;
@@ -71,7 +74,7 @@ public class PlayerScript : MonoBehaviour
         currentState = State.Idle;
         maskIndex = 0;
         ChangeMask(maskIndex);
-        moveSpeed = 7.0f;
+        moveSpeed = 12.0f;
         canMove = true;
         canAttack = true;
         canbeDamaged = true;
@@ -188,8 +191,10 @@ public class PlayerScript : MonoBehaviour
         {
             currentHealth -= (int)(dmg * (1 - damageresist));
             Debug.Log("Player took " + dmg + " damage. Current health: " + currentHealth);
+            playerTakeDamage?.Invoke(currentHealth);
             if (currentHealth <= 0)
             {
+                manager.PanelDerrota();
                 Debug.Log("Player is dead.");
                 // Aqu? puedes agregar l?gica adicional para manejar la muerte del jugador
             }

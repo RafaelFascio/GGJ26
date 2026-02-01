@@ -7,6 +7,7 @@ public class ManagerScript : MonoBehaviour
 {
     public GameObject panelDerrota;
     public GameObject panelPausa;
+    public GameObject panelVictoria;
     public bool enPausa=false;
 
     InputAction pausa;
@@ -14,6 +15,7 @@ public class ManagerScript : MonoBehaviour
     void Start()
     {
         pausa = InputSystem.actions.FindAction("Pausar");
+        Reanudar();
     }
 
     // Update is called once per frame
@@ -38,6 +40,11 @@ public class ManagerScript : MonoBehaviour
     public void PanelDerrota()
     {
         panelDerrota.SetActive(true);
+        Pausa();
+    }
+    public void PanelVictoria()
+    {
+        panelVictoria.SetActive(true);
         Pausa();
     }
     public void CargarEscena(string name)
