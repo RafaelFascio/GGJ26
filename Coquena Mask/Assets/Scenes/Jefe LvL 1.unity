@@ -1626,8 +1626,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LlamaScript
   pistola: {fileID: 1025171694}
   forwardSpeed: 10
-  sideSpeed: 5
-  tiltAngle: 25
+  sideSpeed: 10
+  tiltAngle: 15
   tiltSpeed: 10
 --- !u!54 &596022781
 Rigidbody:
@@ -1790,7 +1790,7 @@ MonoBehaviour:
   speed: 0
   yaguareteHitCount: 0
   forwardSpeed: 10
-  sideSpeed: 5
+  sideSpeed: 10
   sideChangeTime: 2
   tiltAngle: 15
   tiltSpeed: 10
