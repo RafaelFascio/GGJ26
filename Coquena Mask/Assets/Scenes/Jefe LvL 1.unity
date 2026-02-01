@@ -1792,13 +1792,13 @@ MonoBehaviour:
   forwardSpeed: 10
   sideSpeed: 5
   sideChangeTime: 2
-  tiltAngle: 8
-  tiltSpeed: 4
-  obstaclePrefab: {fileID: 2546109222260901928, guid: 96e4c73fd8c327b4ba75bff39ef7da97, type: 3}
+  tiltAngle: 15
+  tiltSpeed: 10
+  obstaclePrefab: {fileID: 1265844744660993105, guid: ecb685a6275cd5249b9e42d01aeae00f, type: 3}
   spawnPoint: {fileID: 1119942358}
   minThrowTime: 3
   maxThrowTime: 5
-  throwForce: 20
+  throwForce: 15
 --- !u!54 &630295460
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2294,6 +2294,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1031627912}
   - component: {fileID: 1031627913}
+  - component: {fileID: 1031627914}
   m_Layer: 5
   m_Name: Barra de Vida
   m_TagString: Untagged
@@ -2373,6 +2374,20 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1031627914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1031627911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04e981685fe387148a31d3cb2568c482, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BarraVidaUi
+  barraSlider: {fileID: 1031627913}
+  vidaEnemy: {fileID: 0}
 --- !u!1 &1084253824
 GameObject:
   m_ObjectHideFlags: 0
