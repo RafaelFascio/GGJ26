@@ -363,7 +363,7 @@ MonoBehaviour:
   speed: 0
   yaguareteHitCount: 0
   hitVFXPrefab: {fileID: 7881300006228382605, guid: a334f70a068fb064fbad9afba021a418, type: 3}
-  bloodVFXPrefab: {fileID: 0}
+  bledPrefab: {fileID: 1883499548997518371, guid: 92c8f0f342ad09846bb41d5417897eae, type: 3}
 --- !u!54 &136313121
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -951,7 +951,7 @@ MonoBehaviour:
   speed: 0
   yaguareteHitCount: 0
   hitVFXPrefab: {fileID: 7881300006228382605, guid: a334f70a068fb064fbad9afba021a418, type: 3}
-  bloodVFXPrefab: {fileID: 1883499548997518371, guid: 92c8f0f342ad09846bb41d5417897eae, type: 3}
+  bledPrefab: {fileID: 1883499548997518371, guid: 92c8f0f342ad09846bb41d5417897eae, type: 3}
 --- !u!65 &945769584
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1110,7 +1110,7 @@ MonoBehaviour:
   speed: 0
   yaguareteHitCount: 0
   hitVFXPrefab: {fileID: 7881300006228382605, guid: a334f70a068fb064fbad9afba021a418, type: 3}
-  bloodVFXPrefab: {fileID: 0}
+  bledPrefab: {fileID: 1883499548997518371, guid: 92c8f0f342ad09846bb41d5417897eae, type: 3}
 --- !u!65 &1521926766
 BoxCollider:
   m_ObjectHideFlags: 0
