@@ -1,8 +1,6 @@
 fileFormatVersion: 2
-guid: ff79d2116db6c664583c36cc907cad84
-
-folderAsset: yes
-DefaultImporter:
+guid: 890fcbfe03880a34f83d4c99d95b26b5
+TextScriptImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
