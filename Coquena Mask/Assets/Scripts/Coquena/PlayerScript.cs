@@ -31,7 +31,11 @@ public class PlayerScript : MonoBehaviour
     float dashDuration;
     float dashCooldown;
     float dashTimer;
-    [HideInInspector] public float damageresist;
+    [HideInInspector] public float maxMana;
+    [HideInInspector] public float currentMana;
+    [HideInInspector] public float manaRegen;
+    [HideInInspector] public bool  isManaRegenerating;
+    [HideInInspector] public float damageresist;   
     [HideInInspector] public bool canMove;
     [HideInInspector] public bool canAttack;
     [HideInInspector] public bool canbeDamaged;
@@ -68,7 +72,27 @@ public class PlayerScript : MonoBehaviour
         damageresist = 0f; 
         canDash = false;
         dashSpeed = 35f;
-        dashDuration = .4f; 
+        dashDuration = .4f;
+        maxMana = 125f;
+        currentMana = maxMana;     
+        manaRegen = 0.5f;
+        
+    }
+    public IEnumerator StartManaRegen()
+    {
+        if (!isManaRegenerating && manaRegen !=currentMana) //evita iniciar multiples corrutinas
+        {
+            isManaRegenerating = true;
+            WaitForSeconds waitTime = new(.7f);
+            // Regenera mana cada 0.7 segundos hasta el maximo
+            while (currentMana < maxMana)
+            {
+                currentMana += manaRegen;
+                if (currentMana > maxMana) currentMana = maxMana;
+                yield return waitTime;
+            }
+        }
+        
     }
     void Update()
     {
@@ -91,6 +115,7 @@ public class PlayerScript : MonoBehaviour
 
             if (useAbility1.triggered)
             {
+                
                 currentMask.UseFirstAbility();
             }
             if (useAbility2.triggered)
