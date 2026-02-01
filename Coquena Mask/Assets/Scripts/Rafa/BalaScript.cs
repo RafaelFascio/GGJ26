@@ -22,7 +22,7 @@ public class BalaScript : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             
-            // other.GetComponent<PlayerHealth>()?.TakeDamage(damage);
+            other.GetComponent<PlayerScript>()?.TakeDamage(damage);
 
             Destroy(gameObject);
         }

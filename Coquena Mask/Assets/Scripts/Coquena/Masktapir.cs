@@ -18,7 +18,7 @@ public class Masktapir : Mask
         if (nextAttackTime + attackRate < Time.time)
         {
             attackCount++;
-           // player.move.TurnToMouse();
+            player.move.TurnToMouse();
             StartCoroutine(EnableHitCollider(attackDuration));
             nextAttackTime = Time.time;
             

@@ -24,14 +24,15 @@ public class PlayerScript : MonoBehaviour
     #endregion
 
     #region Stats
-    int maxHealth;
-    int currentHealth;
+    
     float moveSpeed;
     int maskIndex;
     float dashSpeed;
     float dashDuration;
     float dashCooldown;
     float dashTimer;
+    public int maxHealth;
+    public int currentHealth;
     [HideInInspector] public float maxMana;
     [HideInInspector] public float currentMana;
     [HideInInspector] public float manaRegen;
@@ -64,6 +65,7 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         maxHealth = 100;
+        maxMana = 125f;
         currentHealth = maxHealth;
         currentState = State.Idle;
         maskIndex = 0;
@@ -75,8 +77,7 @@ public class PlayerScript : MonoBehaviour
         damageresist = 0f;
         canDash = false;
         dashSpeed = 35f;
-        dashDuration = .4f;
-        maxMana = 125f;
+        dashDuration = .4f;       
         currentMana = maxMana;
         manaRegen = 0.5f;
 
@@ -104,6 +105,7 @@ public class PlayerScript : MonoBehaviour
         {
             if (dash.triggered && canDash)
             {
+                Debug.Log("dasheando");
                 Dash();
             }
             if (canMove)
@@ -179,7 +181,7 @@ public class PlayerScript : MonoBehaviour
         yield return new WaitForSeconds(duration);
         currentState = State.Idle;
     }
-    public void TakeDamage(int dmg)
+    public void TakeDamage(float dmg)
     {
         if (canbeDamaged && currentState != State.Dashing)
         {

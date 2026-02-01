@@ -2,10 +2,10 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
 
-public class CazadorInexperto : MonoBehaviour
+public class CazadorInexperto : Enemy
 {
     public ZonaDeAlerta alertZone;
-
+    EnemyHealthBar healthBar;
     public Animator animator;
     public enum EstadosCazador
     {
@@ -39,9 +39,13 @@ public class CazadorInexperto : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        healthBar = GetComponentInChildren<EnemyHealthBar>();
         alertZone.RegistrarEnemigo(this);
         agent.isStopped = true;
         transform.position = puntoDeDescanso.position;
+        maxHp = 120;
+        currentHp = maxHp;
+        speed = agent.speed;
     }
 
     // Update is called once per frame
@@ -203,6 +207,7 @@ public class CazadorInexperto : MonoBehaviour
         ChangeState(EstadosCazador.DESCANSANDO);
     }
 
+    
     void Muerte()
     {
         agent.isStopped = true;
@@ -221,5 +226,20 @@ public class CazadorInexperto : MonoBehaviour
         Vector3 lookDir = player.position - transform.position;
         lookDir.y = 0;
         transform.rotation = Quaternion.LookRotation(lookDir);
+    }
+    override public void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+        healthBar.damageAmount += (int)damage;
+        healthBar.damageText.text = healthBar.damageAmount.ToString();
+        healthBar.timer = 0;
+        if (!healthBar.showDamage)
+        {
+            StartCoroutine(healthBar.ShowText());
+        }
+        else
+        {
+            if (healthBar.damageText != null) healthBar.damageText.enabled = true;
+        }
     }
 }
