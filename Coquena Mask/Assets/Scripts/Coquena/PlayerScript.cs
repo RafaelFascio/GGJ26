@@ -5,7 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerScript : MonoBehaviour
 {
-
+    public GameObject ghostPrefab;
+    TrailRenderer trailRenderer;
     #region components
     public List<GameObject> masks = new List<GameObject>();
     CharacterController controller;
@@ -31,24 +32,26 @@ public class PlayerScript : MonoBehaviour
     float dashDuration;
     float dashCooldown;
     float dashTimer;
+    [HideInInspector] public float maxMana;
+    [HideInInspector] public float currentMana;
+    [HideInInspector] public float manaRegen;
+    [HideInInspector] public bool isManaRegenerating;
     [HideInInspector] public float damageresist;
     [HideInInspector] public bool canMove;
     [HideInInspector] public bool canAttack;
     [HideInInspector] public bool canbeDamaged;
     [HideInInspector] public bool canDash;
     #endregion
-    public GameObject ghostPrefab;
-    TrailRenderer trailRenderer;
 
-    public enum State 
+    public enum State
     {
-        Idle,Moving,Stunned,Casting,Dashing
+        Idle, Moving, Stunned, Casting, Dashing
     }
     public State currentState;
     private void Awake()
     {
         move = GetComponent<Move>();
-        controller = GetComponent<CharacterController>();       
+        controller = GetComponent<CharacterController>();
         changeMask = InputSystem.actions.FindAction("ChangeMask");
         attack = InputSystem.actions.FindAction("Attack");
         useAbility1 = InputSystem.actions.FindAction("UseAbility1");
@@ -56,39 +59,58 @@ public class PlayerScript : MonoBehaviour
         dash = InputSystem.actions.FindAction("Dash");
         trailRenderer = GetComponent<TrailRenderer>();
 
+
     }
     void Start()
     {
         maxHealth = 100;
-        currentHealth = maxHealth;      
+        currentHealth = maxHealth;
         currentState = State.Idle;
         maskIndex = 0;
         ChangeMask(maskIndex);
         moveSpeed = 7.0f;
-        canMove =true;
+        canMove = true;
         canAttack = true;
         canbeDamaged = true;
-        damageresist = 0f; 
+        damageresist = 0f;
         canDash = false;
         dashSpeed = 35f;
-        dashDuration = .4f; 
+        dashDuration = .4f;
+        maxMana = 125f;
+        currentMana = maxMana;
+        manaRegen = 0.5f;
+
+    }
+    public IEnumerator StartManaRegen()
+    {
+        if (!isManaRegenerating && manaRegen != currentMana) //evita iniciar multiples corrutinas
+        {
+            isManaRegenerating = true;
+            WaitForSeconds waitTime = new(.7f);
+            // Regenera mana cada 0.7 segundos hasta el maximo
+            while (currentMana < maxMana)
+            {
+                currentMana += manaRegen;
+                if (currentMana > maxMana) currentMana = maxMana;
+                yield return waitTime;
+            }
+        }
 
     }
     void Update()
     {
 
-        if (currentState != State.Stunned )
+        if (currentState != State.Stunned)
         {
             if (dash.triggered && canDash)
             {
-
                 Dash();
             }
-            if (canMove) 
+            if (canMove)
             {
                 move.MoveCharacter(moveSpeed);
             }
-            
+
             if (attack.triggered && canAttack)
             {
                 currentMask.Attack();
@@ -96,13 +118,14 @@ public class PlayerScript : MonoBehaviour
 
             if (useAbility1.triggered)
             {
+
                 currentMask.UseFirstAbility();
             }
             if (useAbility2.triggered)
             {
                 currentMask.UseSecondAbility();
             }
-            
+
             rawScroll = changeMask.ReadValue<Vector2>().y;
             if (!Mathf.Approximately(rawScroll, 0f) && masks.Count > 0)
             {
@@ -113,38 +136,36 @@ public class PlayerScript : MonoBehaviour
         }
 
     }
-    void Dash() 
-    {     
+    void Dash()
+    {
         if (dashTimer > 0f) return;
         StartCoroutine(StartDash());
-
     }
-    IEnumerator StartDash() 
+    IEnumerator StartDash()
     {
         canMove = false;
         canAttack = false;
         currentState = State.Dashing;
         float elapsed = 0f;
 
-        while (elapsed < dashDuration) 
+        while (elapsed < dashDuration)
         {
             controller.Move(transform.forward * dashSpeed * Time.deltaTime);
             SpawnAfterImage();
             elapsed += Time.deltaTime;
             yield return null;
         }
-        
         trailRenderer.emitting = false;
         ghostPrefab.SetActive(false);
         canMove = true;
         canAttack = true;
         currentState = State.Idle;
-        dashTimer = dashCooldown;        
+        dashTimer = dashCooldown;
         StartCoroutine(ResetDash());
     }
-    IEnumerator ResetDash() 
+    IEnumerator ResetDash()
     {
-        while (dashTimer > 0) 
+        while (dashTimer > 0)
         {
             dashTimer -= Time.deltaTime;
             yield return null;
@@ -152,13 +173,13 @@ public class PlayerScript : MonoBehaviour
         dashTimer = 0f;
 
     }
-    IEnumerator WaitForStun(float duration) 
+    IEnumerator WaitForStun(float duration)
     {
         currentState = State.Stunned;
         yield return new WaitForSeconds(duration);
         currentState = State.Idle;
     }
-    public void TakeDamage(int dmg) 
+    public void TakeDamage(int dmg)
     {
         if (canbeDamaged && currentState != State.Dashing)
         {
@@ -167,40 +188,38 @@ public class PlayerScript : MonoBehaviour
             if (currentHealth <= 0)
             {
                 Debug.Log("Player is dead.");
-                // Aquí puedes agregar lógica adicional para manejar la muerte del jugador
+                // Aqu? puedes agregar l?gica adicional para manejar la muerte del jugador
             }
         }
     }
-    public void PushPlayer() 
+    public void PushPlayer()
     {
-        // Empuja al jugador dependendo de la dirección del ataque recibido
+        // Empuja al jugador dependendo de la direcci?n del ataque recibido
         //soonTM
 
     }
 
-    void ChangeMask(int i) 
+    void ChangeMask(int i)
     {
         Debug.Log("Changing to mask index: " + i);
-        for (int j = 0; j < masks.Count; j++) 
+        for (int j = 0; j < masks.Count; j++)
         {
-            if (j == i) 
+            if (j == i)
             {
                 masks[j].SetActive(true);
             }
-            else 
+            else
             {
                 masks[j].SetActive(false);
             }
         }
     }
     void SpawnAfterImage()
-
-{
+    {
         trailRenderer.emitting = true;
         ghostPrefab.SetActive(true);
 
         GameObject ghost = Instantiate(ghostPrefab, transform.position, transform.rotation);
-    Destroy(ghost, 0.2f);
-}
-
+        Destroy(ghost, 0.2f);
+    }
 }
