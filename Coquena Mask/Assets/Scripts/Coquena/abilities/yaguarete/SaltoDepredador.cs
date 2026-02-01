@@ -54,7 +54,7 @@ public class SaltoDepredador : Ability
             elapsed += Time.deltaTime;
             velocity.y += gravity * elapsed; 
             hitCount = Physics.OverlapSphereNonAlloc(transform.position, detectionRadius, hitColliders, layerMask);
-            Debug.Log(velocity.y);
+            
             yield return null;
         }
         velocity = Vector2.zero;

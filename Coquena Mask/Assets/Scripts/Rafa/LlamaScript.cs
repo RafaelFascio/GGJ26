@@ -11,6 +11,7 @@ public class LlamaScript : MonoBehaviour
     [Header("Velocidades")]
     public float forwardSpeed = 5f;
     public float sideSpeed = 3f;
+    public float manualForwardSpeed = 3f;
 
     [Header("Rotación")]
     public float tiltAngle = 10f;
@@ -43,14 +44,21 @@ public class LlamaScript : MonoBehaviour
         
         float sideInput = 0f;
         sideInput = (move.ReadValue<Vector2>().y) * -1;
+
         //if (move.x)
         //    sideInput = -1f;
         //else if (Input.GetKey(KeyCode.S))
         //    sideInput = 1f;
 
-        Vector3 sideMove = transform.right * sideInput * sideSpeed;
+        //Vector3 sideMove = transform.right * sideInput * sideSpeed;
+        forwardMove += transform.right * sideInput * sideSpeed;
 
-        agent.velocity = forwardMove + sideMove;
+        float forwardInput = 0f;
+        forwardInput = (move.ReadValue<Vector2>().x);
+        forwardMove += transform.forward * forwardInput * manualForwardSpeed;
+
+        //agent.velocity = forwardMove + sideMove;
+        agent.velocity = forwardMove;
 
 
         float targetTilt = sideInput * tiltAngle;

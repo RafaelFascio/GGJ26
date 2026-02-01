@@ -5,6 +5,8 @@ using System.Collections;
 public class CazadorInexperto : MonoBehaviour
 {
     public ZonaDeAlerta alertZone;
+
+    public Animator animator;
     public enum EstadosCazador
     {
         DESCANSANDO,
@@ -79,6 +81,8 @@ public class CazadorInexperto : MonoBehaviour
 
     void ChangeState(EstadosCazador newState)
     {
+        animator.SetBool("run", false);
+        animator.SetBool("walk", false);
         if (estadoRutina != null)
             StopCoroutine(estadoRutina);
 
@@ -107,6 +111,7 @@ public class CazadorInexperto : MonoBehaviour
 
     IEnumerator EstadoDisparar()
     {
+        MirarPlayer();
         agent.isStopped = true;
 
         int disparos = Random.Range(minShoots, maxShoots + 1);
@@ -114,7 +119,7 @@ public class CazadorInexperto : MonoBehaviour
         for (int i = 0; i < disparos; i++)
         {
             if (!playerEnZona || playerMuerto) break;
-
+            //animator.SetTrigger("shot");
             Disparar();
             yield return new WaitForSeconds(tiempoEntreDisparos);
         }
@@ -140,9 +145,41 @@ public class CazadorInexperto : MonoBehaviour
         {
             agent.SetDestination(hit.position);
         }
+        else
+        {
+            ChangeState(EstadosCazador.DISPARAR);
+            yield break;
+        }
 
-        float fleeTime = Random.Range(minTime, maxTime);
-        yield return new WaitForSeconds(fleeTime);
+        animator.SetBool("run", true);
+
+        //float fleeTime = Random.Range(minTime, maxTime);
+        //yield return new WaitForSeconds(fleeTime);
+        //animator.SetBool("run", false);
+        Vector3 lastPosition = transform.position;
+        float traveledDistance = 0f;
+
+        // Esperar hasta llegar o recorrer la distancia
+        while (true)
+        {
+            if (!agent.pathPending)
+            {
+                // Llegó al destino
+                if (agent.remainingDistance <= agent.stoppingDistance)
+                    break;
+            }
+
+            // Calcular distancia recorrida
+            traveledDistance += Vector3.Distance(transform.position, lastPosition);
+            lastPosition = transform.position;
+
+            if (traveledDistance >= fleeDistance)
+                break;
+
+            yield return null;
+        }
+
+        agent.isStopped = true;
 
         if (playerEnZona)
             ChangeState(EstadosCazador.DISPARAR);
@@ -154,25 +191,28 @@ public class CazadorInexperto : MonoBehaviour
     {
         agent.isStopped = false;
         agent.SetDestination(puntoDeDescanso.position);
+        animator.SetBool("walk", true);
 
-        while (Vector3.Distance(transform.position, puntoDeDescanso.position) > 0.5f)
+        while (Vector3.Distance(transform.position, puntoDeDescanso.position) > 1f)
         {
             yield return null;
         }
 
         agent.isStopped = true;
+        //animator.SetBool("walk", false);
         ChangeState(EstadosCazador.DESCANSANDO);
     }
 
     void Muerte()
     {
         agent.isStopped = true;
-        // animacion de muerte? o solo va a desaparacer
+        animator.SetTrigger("muerte");
     }
 
 
     void Disparar()
     {
+        animator.SetTrigger("shot");
         pistola.GetComponent<GeneradorBalas>().Fire();
     }
 

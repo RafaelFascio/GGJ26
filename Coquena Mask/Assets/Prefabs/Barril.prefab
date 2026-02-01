@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3533949488031813071}
   - component: {fileID: 2497479356363931585}
   - component: {fileID: 7237605241680182250}
+  - component: {fileID: 4607742555436244428}
   m_Layer: 0
   m_Name: Barril
   m_TagString: Untagged
@@ -142,3 +143,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4607742555436244428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265844744660993105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51a067954b2b493499068cc8828dbbce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BarrilScript
+  manager: {fileID: 0}
