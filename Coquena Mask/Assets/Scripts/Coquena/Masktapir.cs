@@ -10,6 +10,7 @@ Embestida del espíritu del Monte: Embiste rápidamente un área seleccionada, haci
 */
 public class Masktapir : Mask
 {
+    
     Pisoton pisoton;
     EmbestidaEspiritu embestida;
     float damageResist = 0.25f; //25% de resistencia al daño
@@ -21,11 +22,12 @@ public class Masktapir : Mask
             player.move.TurnToMouse();
             StartCoroutine(EnableHitCollider(attackDuration));
             nextAttackTime = Time.time;
-            
+            animator.SetTrigger("punch");
             //attacking = true;
         }
         else
         {
+            
             Debug.Log("Already attacking!");
         }
     }

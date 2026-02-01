@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 
 public class Move : MonoBehaviour
 {
+    public Animator animator;
     #region Components
     Vector3 direction;
     Transform cameraTransform;
@@ -25,6 +26,7 @@ public class Move : MonoBehaviour
 
     private void Awake()
     {
+        //animator = GetComponent<Animator>();
         gravity = 10f;
         flying = false;
         cameraTransform = Camera.main.transform;
@@ -45,6 +47,7 @@ public class Move : MonoBehaviour
 
         if (!flying)
         {
+            animator.SetBool("volando", false);
             if (!controller.isGrounded)
             {
                 direction.y -= gravity * (Time.deltaTime + timeFlying);
@@ -56,9 +59,9 @@ public class Move : MonoBehaviour
                 timeFlying = 0f;
             }
         }
-        else {  
-               
-                currentHeight = GetCurrentHeight();
+        else {
+            animator.SetBool("volando", true);
+            currentHeight = GetCurrentHeight();
                 
                 float heightDifference = targetHeight - currentHeight;
                 
@@ -68,6 +71,9 @@ public class Move : MonoBehaviour
         
         Turn(input);
         controller.Move(direction * Time.deltaTime);
+        bool isMove = IsMoving();
+
+        animator.SetBool("run", isMove);
         
     }
 

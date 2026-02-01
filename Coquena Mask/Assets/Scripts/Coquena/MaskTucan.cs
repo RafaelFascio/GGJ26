@@ -68,6 +68,7 @@ public class MaskTucan : Mask
         nextAttackTime = 0;
         attackCount = 0;
         player.move.flying = true;
+        //animator.SetBool("volando", true);
     }
     private void OnDisable()
     {

@@ -7,6 +7,7 @@ public class PlayerScript : MonoBehaviour
 {
     public GameObject ghostPrefab;
     TrailRenderer trailRenderer;
+    //public Animator animator;
     #region components
     public List<GameObject> masks = new List<GameObject>();
     CharacterController controller;
@@ -116,6 +117,7 @@ public class PlayerScript : MonoBehaviour
             if (attack.triggered && canAttack)
             {
                 currentMask.Attack();
+                //animator.SetTrigger("punch");
             }
 
             if (useAbility1.triggered)
