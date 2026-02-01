@@ -80,8 +80,10 @@ public class Masktapir : Mask
             {
                 Debug.Log("enemigo Embestido");
                 enemy.TakeDamage(embestida.chargeDamage);
-               // enemy.ApplyStun(embestida.stunDuration);
-            }else //el trigger se activo durante un ataque normal
+                enemy.Aturdir(embestida.stunDuration);
+                // enemy.ApplyStun(embestida.stunDuration);
+            }
+            else //el trigger se activo durante un ataque normal
             {
                 enemy.TakeDamage(attackDamage);
                 if (attackCount >= 3)

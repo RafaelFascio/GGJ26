@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
 
-public class CazadorInexperto : MonoBehaviour
+public class CazadorInexperto : Enemy
 {
     public ZonaDeAlerta alertZone;
     public enum EstadosCazador
@@ -11,7 +11,8 @@ public class CazadorInexperto : MonoBehaviour
         DISPARAR,
         HUIDA,
         VOLVER,
-        MUERTO
+        MUERTO,
+        ATURDIDO
     }
 
     public EstadosCazador currentState = EstadosCazador.DESCANSANDO;
@@ -40,15 +41,20 @@ public class CazadorInexperto : MonoBehaviour
         alertZone.RegistrarEnemigo(this);
         agent.isStopped = true;
         transform.position = puntoDeDescanso.position;
+        maxHp = 100;
+        currentHp = maxHp;
+        speed = agent.speed;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (currentState == EstadosCazador.ATURDIDO) { return; }
         if (currentState == EstadosCazador.DISPARAR)
         {
             MirarPlayer();
         }
+        Debug.Log("Cazador Inexperto Estado: " + currentState.ToString());
     }
 
 
@@ -101,6 +107,7 @@ public class CazadorInexperto : MonoBehaviour
             case EstadosCazador.MUERTO:
                 Muerte();
                 break;
+
         }
     }
 
@@ -164,6 +171,16 @@ public class CazadorInexperto : MonoBehaviour
         ChangeState(EstadosCazador.DESCANSANDO);
     }
 
+    IEnumerator EstadoAturdido(float duracion)
+    {
+        currentState = EstadosCazador.ATURDIDO;
+        agent.isStopped = true;
+        yield return new WaitForSeconds(duracion);
+        if (playerEnZona)
+            ChangeState(EstadosCazador.DISPARAR);
+        else
+            ChangeState(EstadosCazador.VOLVER);
+    }
     void Muerte()
     {
         agent.isStopped = true;
@@ -181,5 +198,13 @@ public class CazadorInexperto : MonoBehaviour
         Vector3 lookDir = player.position - transform.position;
         lookDir.y = 0;
         transform.rotation = Quaternion.LookRotation(lookDir);
+    }
+
+    public override void Aturdir(float duracion)
+    {
+        if (currentState == EstadosCazador.MUERTO) return;
+        if (estadoRutina != null)
+            StopCoroutine(estadoRutina);
+        estadoRutina = StartCoroutine(EstadoAturdido(duracion));
     }
 }
