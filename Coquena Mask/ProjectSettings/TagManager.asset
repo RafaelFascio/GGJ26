@@ -7,7 +7,7 @@ TagManager:
   - Enemy
   - ground
   - EndPath
-  - Limite
+  - DamageObject
   layers:
   - Default
   - TransparentFX
