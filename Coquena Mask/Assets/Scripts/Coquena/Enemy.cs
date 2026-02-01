@@ -9,8 +9,8 @@ public abstract class Enemy : MonoBehaviour
     public float currentHp;
     public float speed;
     public int yaguareteHitCount;
-    public GameObject hitVFXPrefab;
-    public GameObject bledPrefab;
+    //public GameObject hitVFXPrefab;
+    //public GameObject bledPrefab;
     private bool isFlashing;
     private Color color;
     GameObject vfx;
@@ -18,7 +18,7 @@ public abstract class Enemy : MonoBehaviour
     public virtual void TakeDamage(float damage)
     {
         //color = Color.white;
-        StartCoroutine(HitFlash(GetComponent<Renderer>()));
+        //StartCoroutine(HitFlash(GetComponent<Renderer>()));
         float vidaTemporal = currentHp - damage;
         vidaTemporal = Mathf.Clamp(vidaTemporal, 0, maxHp);
         currentHp = vidaTemporal;
@@ -67,12 +67,12 @@ public abstract class Enemy : MonoBehaviour
     }
     public void SpawnHitVFX(Vector3 hitPoint, Vector3 hitDirection)
     {
-        GameObject vfx = Instantiate(hitVFXPrefab, hitPoint, Quaternion.LookRotation(hitDirection));
+        //GameObject vfx = Instantiate(hitVFXPrefab, hitPoint, Quaternion.LookRotation(hitDirection));
         Destroy(vfx, 0.5f);
     }
     public void SpawnBoodVFX(Vector3 hitPoint, Vector3 hitDirection,float duration)
     {
-        vfx = Instantiate(bledPrefab, hitPoint, Quaternion.LookRotation(hitDirection));
+        //vfx = Instantiate(bledPrefab, hitPoint, Quaternion.LookRotation(hitDirection));
         Destroy(vfx, duration);
     }
     IEnumerator HitFlash(Renderer rend)
