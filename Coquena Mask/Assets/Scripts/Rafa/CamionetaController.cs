@@ -4,6 +4,7 @@ using System.Collections;
 
 public class CamionetaController : Enemy
 {
+    public ManagerScript manager;
     [Header("Movimiento")]
     public float forwardSpeed = 6f;
     public float sideSpeed = 2f;
@@ -81,7 +82,8 @@ public class CamionetaController : Enemy
     {
         if (obstaclePrefab == null || spawnPoint == null) return;
 
-        GameObject obj = Instantiate(obstaclePrefab, spawnPoint.position, Quaternion.identity);
+        //GameObject obj = Instantiate(obstaclePrefab, spawnPoint.position, Quaternion.identity);
+        GameObject obj = Instantiate(obstaclePrefab, spawnPoint.position, spawnPoint.transform.rotation);
 
         Rigidbody rb = obj.GetComponent<Rigidbody>();
         if (rb != null)
@@ -90,10 +92,20 @@ public class CamionetaController : Enemy
         }
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Limite"))
+        {
+            sideDirection *= -1f;
+            agent.velocity += transform.right * sideDirection * sideSpeed;
+        }
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("EndPath"))
         {
+            manager.PanelDerrota();
             Destroy(gameObject); 
         }
     }
