@@ -34,7 +34,7 @@ public class EnemyHealthBar : MonoBehaviour
     {
         float percentage = enemy.currentHp / enemy.maxHp;
         size.x = widthRange.x * percentage;
-        
+   //     Debug.Log(percentage);
         healthBarFill.size = size;
     }
     public IEnumerator ShowText()
