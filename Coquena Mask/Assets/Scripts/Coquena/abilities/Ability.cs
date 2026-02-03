@@ -19,11 +19,11 @@ public abstract class Ability :MonoBehaviour
         isUsable = false;
         while (timer > 0)
         {
-            Debug.Log("Cooldown timer: " + timer);
+         //   Debug.Log("Cooldown timer: " + timer);
             yield return _waitForSeconds1;
             timer--;
         }
-        Debug.Log("ability ready");
+       // Debug.Log("ability ready");
         isUsable = true;
     }
     public abstract void Use();
@@ -38,7 +38,7 @@ public abstract class Ability :MonoBehaviour
         }
         else
         {
-            Debug.Log("Modifier " + Abilityname + " is on cooldown. Time left: " + timer + " seconds.");
+            Debug.Log("Ability " + Abilityname + " is on cooldown. Time left: " + timer + " seconds.");
         }
     }
     void OnEnable()

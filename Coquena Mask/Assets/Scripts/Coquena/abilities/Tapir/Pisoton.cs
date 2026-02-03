@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 //Pisotón furioso: crea un temblor que ralentiza a todos los enemigos
 public class Pisoton : Ability
@@ -11,10 +12,16 @@ public class Pisoton : Ability
     public override void Use()
     {
       Collider[] coliders =  Physics.OverlapSphere(transform.position, radius, mask);
-        foreach (Collider hit in coliders) 
+
+        if (coliders != null) 
         {
-            hit.gameObject.GetComponent<Enemy>().ApplySlow(slowAmount, 3f);
+            foreach (Collider hit in coliders)
+            {
+          
+               hit.gameObject.GetComponent<Enemy>().ApplySlow(slowAmount, 3f,hit.GetComponent<NavMeshAgent>());
+            }
         }
+        
     }
 
     private void Awake()
@@ -26,7 +33,7 @@ public class Pisoton : Ability
         timer = 0f;
         isUsable = true;
         cost = 10;
-        slowAmount = 5f;
+        slowAmount = 2f;
         radius = 15;
         
     }

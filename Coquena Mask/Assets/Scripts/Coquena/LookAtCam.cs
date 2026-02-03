@@ -13,6 +13,8 @@ public class LookAtCam : MonoBehaviour
 
     private void Awake()
     {
+        Quaternion initialRotation = Camera.main.transform.rotation;
+        transform.rotation= initialRotation;
         // Guardamos la rotación mundial inicial como la que queremos mantener
         desiredWorldRotation = transform.rotation;
     }

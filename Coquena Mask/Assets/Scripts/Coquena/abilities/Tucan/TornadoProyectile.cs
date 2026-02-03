@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class TornadoProyectile : MonoBehaviour
 {
@@ -32,9 +33,8 @@ public class TornadoProyectile : MonoBehaviour
             Debug.Log("Tornado hit an enemy!");
             Enemy enemy = other.gameObject.GetComponent<Enemy>();
             enemy.TakeDamage(damage);
-            enemy.ApplySlow(slowAmount, slowDuration);
-            //Hago daño
-            //Slow
+            enemy.ApplySlow(slowAmount, slowDuration,enemy.GetComponent<NavMeshAgent>());
+           
         }
         //    Destroy(gameObject);
     }

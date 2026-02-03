@@ -13,6 +13,7 @@ public class Masktapir : Mask
     
     Pisoton pisoton;
     EmbestidaEspiritu embestida;
+    float stunDuration;
     float damageResist = 0.25f; //25% de resistencia al daño
     public override void Attack()
     {
@@ -23,7 +24,7 @@ public class Masktapir : Mask
             StartCoroutine(EnableHitCollider(attackDuration));
             nextAttackTime = Time.time;
             animator.SetTrigger("punch");
-            //attacking = true;
+            
         }
         else
         {
@@ -68,6 +69,7 @@ public class Masktapir : Mask
         attackDuration = 0.3f;
         attackDamage = 10;
         damageResist = 0.25f;
+        stunDuration = 3;
     }
     
     private void OnTriggerEnter(Collider other)
@@ -82,13 +84,14 @@ public class Masktapir : Mask
             {
                 Debug.Log("enemigo Embestido");
                 enemy.TakeDamage(embestida.chargeDamage);
-               // enemy.ApplyStun(embestida.stunDuration);
+                enemy.ApplyStun(embestida.stunDuration);
             }else //el trigger se activo durante un ataque normal
             {
                 enemy.TakeDamage(attackDamage);
                 if (attackCount >= 3)
                 {
-                    //   estuneo por ataque(); 
+                    Debug.Log("Atudi por ataque");
+                    enemy.ApplyStun(stunDuration);
                 }
             }           
         }

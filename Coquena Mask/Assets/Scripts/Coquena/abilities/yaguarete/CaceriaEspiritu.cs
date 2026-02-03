@@ -1,24 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 //Caceria del Espiritu del Guerrero: Lanza muchos zarpazos en un área causando
 //mucho daño a los que estén en el rango (tipo q de Yi)
 public class CaceriaEspiritu : Ability
 {
     
-    float damagePerHit = 25f;
-    float areaRadius = 6f;
-    float hitInterval = 0.2f;
+    float damagePerHit;
+    float areaRadius;
+    float hitInterval;
     bool isAttacking = false;
-    float offsetDistance = 7f;
+    float offsetDistance;
     public LayerMask enemylayer;
+    public GameObject Verdad;
     Vector3 center;
     Stack<Enemy> enemiesInRange = new Stack<Enemy>();
     public override void Use()
     {
         enemiesInRange.Clear();
         player.currentState = PlayerScript.State.Casting;
-        center = transform.position + transform.forward * offsetDistance;
+       //el centro es adelante del player
+        center = transform.position +transform.forward *offsetDistance;
+        
         Collider[] hits = Physics.OverlapSphere(center, areaRadius, enemylayer);
         if (hits.Length > 0)
         {
@@ -44,7 +48,10 @@ public class CaceriaEspiritu : Ability
 
 
     }
-    
+    private void Update()
+    {
+        Verdad.transform.position = center;
+    }
     IEnumerator StartAttacks() 
     {
         player.canAttack = false;
@@ -64,11 +71,10 @@ public class CaceriaEspiritu : Ability
     }
     private void OnDrawGizmos()
     {
-        if (isAttacking) 
-        {
+            
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(center, areaRadius);
-        }
+            Gizmos.DrawWireSphere(transform.position + transform.forward * offsetDistance, areaRadius);
+        
        
     }
     private void Awake()
@@ -81,5 +87,9 @@ public class CaceriaEspiritu : Ability
         isUsable = true;
         cost = 10;
         player = GetComponentInParent<PlayerScript>();
+        offsetDistance = 24.5f;
+        damagePerHit = 20;
+        areaRadius = 25;
+        hitInterval = 0.4f;
     }
 }

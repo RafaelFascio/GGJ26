@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using System;
+using UnityEngine.AI;
 
 public abstract class Enemy : MonoBehaviour
 {
@@ -30,10 +31,12 @@ public abstract class Enemy : MonoBehaviour
 
         }
     }
-    public virtual void ApplySlow(float amount, float duration)
+    public virtual void ApplySlow(float amount, float duration,NavMeshAgent agent)
     {
-        StartCoroutine(ChangeSpeed(amount, duration));
+        StartCoroutine(ChangeSpeed(amount, duration,agent));
     }
+    public virtual void ApplyStun(float duration) { }
+   
     public virtual void ApplyDamageOverTime(float damagePerTick, float duration, float tick)
     {
         float dur = duration;
@@ -46,11 +49,11 @@ public abstract class Enemy : MonoBehaviour
     {
         Destroy(gameObject);
     }
-    IEnumerator ChangeSpeed(float amount, float duration)
+    IEnumerator ChangeSpeed(float amount, float duration,NavMeshAgent agent)
     {
-        speed -= amount;
+        agent.speed -= amount;   
         yield return new WaitForSeconds(duration);
-        speed += amount;
+        agent.speed += amount;
     }
     IEnumerator DoDamageOverTime(float damagePerTick, float duration, float tick)
     {

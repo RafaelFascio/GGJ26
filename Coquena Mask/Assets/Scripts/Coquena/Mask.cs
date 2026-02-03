@@ -3,6 +3,7 @@ using UnityEngine;
 
 public abstract class Mask :MonoBehaviour
 {
+    
     public Animator animator;
    [HideInInspector] public PlayerScript player;
    [HideInInspector] public Collider hitbox;

@@ -322,6 +322,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 72
+  laVerdad: {fileID: 0}
   hitObject: 0
 --- !u!114 &7010852307915383047
 MonoBehaviour:
@@ -543,6 +544,7 @@ MonoBehaviour:
   enemylayer:
     serializedVersion: 2
     m_Bits: 8
+  Verdad: {fileID: 0}
 --- !u!114 &113068726539154515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -854,6 +856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be731c019001d404e893515420313986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerScript
+  manager: {fileID: 0}
   ghostPrefab: {fileID: 0}
   masks:
   - {fileID: 8245895672521165626}

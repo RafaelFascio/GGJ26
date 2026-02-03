@@ -190,7 +190,7 @@ public class PlayerScript : MonoBehaviour
         if (canbeDamaged && currentState != State.Dashing)
         {
             currentHealth -= (int)(dmg * (1 - damageresist));
-            Debug.Log("Player took " + dmg + " damage. Current health: " + currentHealth);
+         //   Debug.Log("Player took " + dmg + " damage. Current health: " + currentHealth);
             playerTakeDamage?.Invoke(currentHealth);
             if (currentHealth <= 0)
             {

@@ -22,8 +22,8 @@ public class MaskYaguarete : Mask
             player.move.TurnToMouse();
             StartCoroutine(EnableHitCollider(attackDuration));
             nextAttackTime = Time.time;
-            
-            
+            animator.SetTrigger("punch");
+
         }
         else
         {
