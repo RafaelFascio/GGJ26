@@ -9,6 +9,7 @@ public class SaltoDepredador : Ability
     Vector2 velocity; 
     float gravity; 
     float detectionRadius;
+    float stunDuration;
     int  hitCount;
     float maxduration;
     Collider[] hitColliders;
@@ -17,7 +18,7 @@ public class SaltoDepredador : Ability
     {
 
         
-        velocity = new Vector2(35f, 7f);
+        velocity = new Vector2(45f, 12f);
         StartCoroutine(Jump());
     }
     private void Awake()
@@ -33,6 +34,7 @@ public class SaltoDepredador : Ability
         hitColliders = new Collider[1];
         gravity = -10f;
         detectionRadius = 2f;
+        stunDuration = 6f;
         controller = GetComponentInParent<CharacterController>();
         player = GetComponentInParent<PlayerScript>();
     }
@@ -61,7 +63,7 @@ public class SaltoDepredador : Ability
         jumping = false;
         if (hitCount >0) 
         {
-            //Aturdir enemigo
+            hitColliders[0].GetComponent<Enemy>().ApplyStun(stunDuration);
             Debug.Log("Enemigo aturdido");
         }
         timer = cooldown;

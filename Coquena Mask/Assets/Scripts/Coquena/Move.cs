@@ -163,10 +163,10 @@ public class Move : MonoBehaviour
         }
        
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(screenPos.x, screenPos.y,0 ));
-        if (Physics.Raycast(ray, out RaycastHit raycastHit))
+        if (Physics.Raycast(ray, out RaycastHit raycastHit,1000,groundMask))
         {
             mousePos = raycastHit.point;
-            
+          
         }
         
         return mousePos;

@@ -1,7 +1,6 @@
 using System.Collections;
-//using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
+
 //Pico perforador se lanza sobre un enemigo y lo atraviesa con el pico causando mucho daño
 public class PicoPerforador : Ability
 {
@@ -11,7 +10,7 @@ public class PicoPerforador : Ability
     public float maxduration;
     public LayerMask layerMask;
     bool charging;
-    
+    public GameObject laVerdad;
     private Collider[] overlapResults = new Collider[16];
     [HideInInspector]public bool hitObject;
     
@@ -22,11 +21,19 @@ public class PicoPerforador : Ability
         hitObject = false;
         player.currentState = PlayerScript.State.Casting;
 
-        //girar el jugador 45 grados en el eje x hacia abajo
-        player.transform.rotation = Quaternion.Euler(45, player.transform.rotation.eulerAngles.y, player.transform.rotation.eulerAngles.z);
-        Vector3 direction = player.move.MousePosition() - player.transform.position;
-        direction.Normalize();
-        StartCoroutine(Descend(direction));
+
+        //  player.transform.rotation = Quaternion.Euler(45, player.transform.rotation.eulerAngles.y, player.transform.rotation.eulerAngles.z);
+        Vector3 mouseTarget = player.move.MousePosition();
+        if (mouseTarget != Vector3.zero) 
+        {
+            Vector3 direction = player.move.MousePosition() - player.transform.position;
+            laVerdad.transform.position = player.move.MousePosition();
+            direction.Normalize();
+            StartCoroutine(Descend(direction));
+        }
+        
+        
+       
 
     }
     IEnumerator Descend(Vector3 direction) 
@@ -36,11 +43,11 @@ public class PicoPerforador : Ability
         int hitsCount = 0;
         float elapsed = 1f;
         charging = true;
-
+        
         //Carga hasta que choca con algo o se acaba el tiempo
         while (!hitObject && elapsed < maxduration) 
         {
-         hitsCount = Physics.OverlapSphereNonAlloc(player.transform.position, detectionRadius,overlapResults,layerMask);
+         hitsCount = Physics.OverlapSphereNonAlloc(transform.position, detectionRadius,overlapResults,layerMask);
             controller.Move(speedBuff * Time.deltaTime * direction);
             
             if (hitsCount >0) 
@@ -87,23 +94,23 @@ public class PicoPerforador : Ability
         timer = 0f;
         isUsable = true;
         cost = 10;
-        speedBuff =14;
+        speedBuff =25;
         detectionRadius = 1.5f;
         maxduration = 4f;
         charging = false;
     }
     private void OnDrawGizmos()
     {
-        if (charging)
-        {
+        //if (charging)
+        //{
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position + transform.forward * 1.7f, detectionRadius);
-        }
-        else
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(transform.position + transform.forward * 1.7f, detectionRadius);
-        }
+            Gizmos.DrawWireSphere(transform.position + transform.forward, detectionRadius);
+        //}
+        //else
+        //{
+        //    Gizmos.color = Color.green;
+        //    Gizmos.DrawWireSphere(transform.position + transform.forward * 1.7f, detectionRadius);
+        //}
     }
 
 }

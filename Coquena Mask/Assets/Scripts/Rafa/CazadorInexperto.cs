@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using System.Threading;
 
 public class CazadorInexperto : Enemy
 {
@@ -13,7 +14,8 @@ public class CazadorInexperto : Enemy
         DISPARAR,
         HUIDA,
         VOLVER,
-        MUERTO
+        MUERTO,
+        ATURDIDO
     }
 
     public EstadosCazador currentState = EstadosCazador.DESCANSANDO;
@@ -23,6 +25,7 @@ public class CazadorInexperto : Enemy
     public Transform puntoDeDescanso;
     public Transform pistola;
 
+    
     public float tiempoEntreDisparos = 0.8f;
     public int minShoots = 2;
     public int maxShoots = 4;
@@ -36,6 +39,10 @@ public class CazadorInexperto : Enemy
     private bool playerMuerto = false;
     private Coroutine estadoRutina;
 
+    public float stunDuration;
+    public float stunTimer;
+    public bool stunned;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -46,6 +53,9 @@ public class CazadorInexperto : Enemy
         maxHp = 120;
         currentHp = maxHp;
         speed = agent.speed;
+        stunTimer = 0;
+        stunned = false;
+        stunDuration = 0;
     }
 
     // Update is called once per frame
@@ -109,6 +119,9 @@ public class CazadorInexperto : Enemy
             case EstadosCazador.MUERTO:
                 Muerte();
                 break;
+            case EstadosCazador.ATURDIDO:
+                 estadoRutina = StartCoroutine(EstadoAturdido());
+                break;
         }
     }
 
@@ -133,7 +146,34 @@ public class CazadorInexperto : Enemy
         else
             ChangeState(EstadosCazador.VOLVER);
     }
+    public override void ApplyStun(float amount) 
+    {
+        if (amount > stunDuration) 
+        {
+            stunTimer =amount;           
+        }
+        
+        ChangeState(EstadosCazador.ATURDIDO);
+    }
+    IEnumerator EstadoAturdido() 
+    {
+        if (stunTimer >0) {yield return null; } //
+        agent.isStopped = true;       
+        
+        while (stunTimer >0) {
+        //    Debug.Log("he sido brutalmente estuneado por: "+ stunTimer + " segundos");
+            stunTimer -= Time.deltaTime;
+            yield return null;
+        }
+        stunTimer = 0; 
+        agent.isStopped = false;
+        if (playerEnZona)
+            ChangeState(EstadosCazador.DISPARAR);
+        else
+            ChangeState(EstadosCazador.VOLVER);
 
+
+    }
     IEnumerator EstadoHuida()
     {
         agent.isStopped = false;

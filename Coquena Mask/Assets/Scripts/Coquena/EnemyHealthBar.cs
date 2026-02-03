@@ -23,7 +23,7 @@ public class EnemyHealthBar : MonoBehaviour
         damageTimer = 3;
         damageText.enabled = false;
         Debug.Log(enemy == null);
-    //    CheckHealth();
+        
     }
     void Update()
     {

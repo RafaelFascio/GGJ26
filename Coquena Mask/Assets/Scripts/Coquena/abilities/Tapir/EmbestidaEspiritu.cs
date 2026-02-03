@@ -5,11 +5,11 @@ using UnityEngine;
 public class EmbestidaEspiritu : Ability
 {
    
-   float chargeDuration = 0.5f;
+   float chargeDuration = 1.2f;
    float chargeTimer = 0f;
    float chargeSpeed = 30f;
-    [HideInInspector]  public float chargeDamage = 50f;
-    [HideInInspector] public float stunDuration = 1f;
+    [HideInInspector]  public float chargeDamage ;
+    [HideInInspector]  public float stunDuration ;
     CharacterController controller;
     Mask mask;
     Vector3 direction;
@@ -30,12 +30,15 @@ public class EmbestidaEspiritu : Ability
         cost = 10;      
         controller = player.GetComponent<CharacterController>();
         mask = GetComponent<Mask>();
+        chargeDamage = 50;
+        stunDuration = 4f;
     }
     IEnumerator Charge() 
     {
+        player.currentState = PlayerScript.State.Casting;
         player.canMove = false;
         player.canAttack =false;
-       
+        player.canbeDamaged = false;
         direction = player.transform.forward;
         direction.y = 0;
         StartCoroutine(mask.EnableHitCollider(chargeDuration));
@@ -47,6 +50,8 @@ public class EmbestidaEspiritu : Ability
         }
         player.canMove = true;
         player.canAttack = true;
+        player.canbeDamaged = true;
         chargeTimer = 0f;
+        player.currentState = PlayerScript.State.Idle;
     }
 }
