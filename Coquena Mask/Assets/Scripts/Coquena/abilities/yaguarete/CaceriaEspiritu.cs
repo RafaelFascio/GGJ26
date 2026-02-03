@@ -13,7 +13,7 @@ public class CaceriaEspiritu : Ability
     bool isAttacking = false;
     float offsetDistance;
     public LayerMask enemylayer;
-    public GameObject Verdad;
+    
     Vector3 center;
     Stack<Enemy> enemiesInRange = new Stack<Enemy>();
     public override void Use()
@@ -47,10 +47,6 @@ public class CaceriaEspiritu : Ability
         }
 
 
-    }
-    private void Update()
-    {
-        Verdad.transform.position = center;
     }
     IEnumerator StartAttacks() 
     {
