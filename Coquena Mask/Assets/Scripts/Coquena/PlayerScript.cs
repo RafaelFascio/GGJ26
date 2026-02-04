@@ -9,6 +9,7 @@ public class PlayerScript : MonoBehaviour
     public Action<int> playerTakeDamage;
     public ManagerScript manager;
     public GameObject ghostPrefab;
+    [HideInInspector] public Sonidos sounds;
     TrailRenderer trailRenderer;
     //public Animator animator;
     #region components
@@ -63,6 +64,7 @@ public class PlayerScript : MonoBehaviour
         useAbility2 = InputSystem.actions.FindAction("UseAbility2");
         dash = InputSystem.actions.FindAction("Dash");
         trailRenderer = GetComponent<TrailRenderer>();
+        sounds = FindFirstObjectByType<Sonidos>();
 
 
     }

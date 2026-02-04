@@ -1543,6 +1543,8 @@ MonoBehaviour:
   attacking: 0
   attackDamage: 0
   attackCount: 0
+  clipTucanAttack: {fileID: 8300000, guid: 983d91f791a35e442b2a45d407ad1933, type: 3}
+  clipTucanWinds: {fileID: 8300000, guid: cf74db8f51a0c114eba9b7494e036fc4, type: 3}
   featherPrefab: {fileID: 8668585151987112665, guid: fa1802819c8751740984246f227b3f1d, type: 3}
   windGustPrefab: {fileID: 6182276568398260894, guid: 60147ac0ed236de409dd7b29198560c7, type: 3}
   spawnpoint: {fileID: 7563761591735803883}
@@ -1596,7 +1598,6 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 72
-  laVerdad: {fileID: 0}
   hitObject: 0
 --- !u!114 &6321214707334846433
 MonoBehaviour:
@@ -2906,6 +2907,7 @@ MonoBehaviour:
   attacking: 0
   attackDamage: 0
   attackCount: 0
+  clipTapirAttack: {fileID: 8300000, guid: e1dda6249d0617a44b823a51ce3908ec, type: 3}
 --- !u!65 &486637390944143277
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2947,6 +2949,7 @@ MonoBehaviour:
   timer: 0
   isUsable: 0
   cost: 0
+  clipEmbestida: {fileID: 8300000, guid: a83c562b9965ac942943bc8546e33a64, type: 3}
   chargeDamage: 50
   stunDuration: 2
 --- !u!114 &5975191411021505498
@@ -3493,6 +3496,8 @@ GameObject:
   - component: {fileID: 8572651952800509028}
   - component: {fileID: 623869418870937014}
   - component: {fileID: 2303974846552236383}
+  - component: {fileID: 2662883981247931779}
+  - component: {fileID: 723155291086312933}
   m_Layer: 0
   m_Name: Player con habilidades
   m_TagString: Player
@@ -3556,6 +3561,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerScript
   manager: {fileID: 0}
   ghostPrefab: {fileID: 8337725144024566412}
+  sounds: {fileID: 723155291086312933}
   masks:
   - {fileID: 4944306030455766492}
   - {fileID: 2913803616675126345}
@@ -3752,6 +3758,117 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 0
   m_ApplyActiveColorSpace: 1
+--- !u!82 &2662883981247931779
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5664410612058427433}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.953
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &723155291086312933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5664410612058427433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bfd6449c634ca44bbf4641bf0d10d6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Sonidos
+  source: {fileID: 2662883981247931779}
+  disparo: {fileID: 0}
 --- !u!1 &5991756390660012303
 GameObject:
   m_ObjectHideFlags: 0
@@ -3842,6 +3959,7 @@ MonoBehaviour:
   attacking: 0
   attackDamage: 0
   attackCount: 0
+  clipYaguareteAttack: {fileID: 8300000, guid: 2b1f2c48e65fc3348b51e0dc52f45e67, type: 3}
 --- !u!136 &8344782701284278226
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3888,7 +4006,6 @@ MonoBehaviour:
   enemylayer:
     serializedVersion: 2
     m_Bits: 8
-  Verdad: {fileID: 0}
 --- !u!114 &3991114130680398517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3909,6 +4026,7 @@ MonoBehaviour:
   timer: 0
   isUsable: 0
   cost: 0
+  clipAbilitySalto: {fileID: 8300000, guid: a0f749a16d66dd348ac10ff44a2c9eb9, type: 3}
   layerMask:
     serializedVersion: 2
     m_Bits: 8

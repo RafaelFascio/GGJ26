@@ -8,7 +8,8 @@ Aleteo del Espíritu del viento: lanza un tornado que daña en área y ralentiza al
 public class MaskTucan : Mask
 {
 
-    
+    public AudioClip  clipTucanAttack;
+    public AudioClip  clipTucanWinds;
     public GameObject featherPrefab;
     public GameObject windGustPrefab;
     public Transform spawnpoint;
@@ -31,12 +32,14 @@ public class MaskTucan : Mask
                 script.direction = direction;
                 script.damage = attackDamage * 2;
                 attackCount = 0;
+                player.sounds.source.PlayOneShot(clipTucanWinds);
             }
             else 
             {
                FeatherProyectile script = Instantiate(featherPrefab, spawnpoint.position, Quaternion.identity).GetComponent<FeatherProyectile>();
                script.direction = direction;
                script.damage = attackDamage;
+               player.sounds.source.PlayOneShot(clipTucanAttack);
             }
                 
              nextAttackTime = Time.time;      

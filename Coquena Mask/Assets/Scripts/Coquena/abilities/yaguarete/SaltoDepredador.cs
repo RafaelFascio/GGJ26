@@ -4,6 +4,7 @@ using UnityEngine;
 //el salto seria como un tiro parabólico, se lanza hacia donde mira el jugador y seguira hasta que toque el suelo o un enemigo;
 public class SaltoDepredador : Ability
 {
+    public AudioClip clipAbilitySalto;
     CharacterController controller;
     public LayerMask layerMask;
     Vector2 velocity; 
@@ -40,8 +41,8 @@ public class SaltoDepredador : Ability
     }
     IEnumerator Jump() 
 
-    {   
-        
+    {
+        player.sounds.source.PlayOneShot(clipAbilitySalto);
         jumping = true;
         player.canMove = false;
         player.currentState = PlayerScript.State.Casting;
