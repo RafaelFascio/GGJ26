@@ -26,11 +26,11 @@ public class MaskUIController : MonoBehaviour
     void HandleMaskChanged(Mask newMask)
     {
         // Cambiar icono
-        maskIcon.sprite = newMask.icon;
+        //maskIcon.sprite = newMask.icon;
 
         // Color según tipo
-        Color typeColor = newMask.maskColor;
-        glow.color = new Color(typeColor.r, typeColor.g, typeColor.b, 0.4f);
+        //Color typeColor = newMask.maskColor;
+        //glow.color = new Color(typeColor.r, typeColor.g, typeColor.b, 0.4f);
 
         // 🎬 Animación por código
         anim.AnimateScale(Vector3.one * 0.8f, Vector3.one, 0.15f);

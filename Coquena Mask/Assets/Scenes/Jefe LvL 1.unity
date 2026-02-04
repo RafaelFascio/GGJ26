@@ -1959,8 +1959,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 969d49f89764238469ed73677b8bb587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CamionetaController
-  maxHp: 20
-  currentHp: 20
+  maxHp: 300
+  currentHp: 300
   speed: 0
   yaguareteHitCount: 0
   manager: {fileID: 795082395}
