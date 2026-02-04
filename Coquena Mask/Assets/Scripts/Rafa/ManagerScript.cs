@@ -8,6 +8,7 @@ public class ManagerScript : MonoBehaviour
     public GameObject panelDerrota;
     public GameObject panelPausa;
     public GameObject panelVictoria;
+    public Sound_Manager Sound_Manager;
     public bool enPausa=false;
 
     InputAction pausa;
@@ -24,6 +25,7 @@ public class ManagerScript : MonoBehaviour
         if (pausa.triggered & !enPausa)
         {
             PanelPausa();
+            
         }
     }
 
@@ -62,11 +64,13 @@ public class ManagerScript : MonoBehaviour
     {
         enPausa=true;
         Time.timeScale = 0f;
+        Sound_Manager.Pausar_Audios();
     }
 
     public void Reanudar()
     {
         enPausa = false;
         Time.timeScale = 1.0f;
+        Sound_Manager.Play_Audios();
     }
 }

@@ -8,6 +8,8 @@ TagManager:
   - ground
   - EndPath
   - DamageObject
+  - Limite
+  - Jefe1
   layers:
   - Default
   - TransparentFX
