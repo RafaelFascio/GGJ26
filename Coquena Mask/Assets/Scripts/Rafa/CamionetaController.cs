@@ -109,4 +109,10 @@ public class CamionetaController : Enemy
             Destroy(gameObject); 
         }
     }
+
+    public override void Die()
+    {
+        manager.PanelVictoria();
+        Destroy(gameObject);
+    }
 }

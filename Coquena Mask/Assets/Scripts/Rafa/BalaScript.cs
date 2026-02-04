@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class BalaScript : MonoBehaviour
 {
+    public AudioClip AudioClip;
+    public AudioSource AudioSource;
     public float speed = 20f;
     public float lifeTime = 5f;
     public float damage = 1;
@@ -23,14 +25,16 @@ public class BalaScript : MonoBehaviour
         {
             
             other.GetComponent<PlayerScript>()?.TakeDamage(damage);
-
             Destroy(gameObject);
         }
 
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Jefe1"))
         {
             other.GetComponent<Enemy>().TakeDamage(damage);
-            Destroy(gameObject);
+            GetComponent<MeshRenderer>().enabled = false;
+            GetComponent<TrailRenderer>().enabled = false;
+            AudioSource.PlayOneShot(AudioClip);
+            Destroy(gameObject,1f);
         }
     }
 }
