@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerScript : MonoBehaviour
 {
+    public static Action<Mask> OnMaskChanged;
+
     public Action<int> playerTakeDamage;
     public ManagerScript manager;
     public GameObject ghostPrefab;
@@ -235,18 +237,20 @@ public class PlayerScript : MonoBehaviour
     void ChangeMask(int i)
     {
         Debug.Log("Changing to mask index: " + i);
+
         for (int j = 0; j < masks.Count; j++)
         {
-            if (j == i)
+            bool active = j == i;
+            masks[j].SetActive(active);
+
+            if (active)
             {
-                masks[j].SetActive(true);
-            }
-            else
-            {
-                masks[j].SetActive(false);
+                currentMask = masks[j].GetComponent<Mask>();
             }
         }
+        OnMaskChanged?.Invoke(currentMask);
     }
+
     void SpawnAfterImage()
     {
         trailRenderer.emitting = true;
