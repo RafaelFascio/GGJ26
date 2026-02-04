@@ -10,7 +10,7 @@ public class PicoPerforador : Ability
     public float maxduration;
     public LayerMask layerMask;
     bool charging;
-    public GameObject laVerdad;
+    
     private Collider[] overlapResults = new Collider[16];
     [HideInInspector]public bool hitObject;
     
@@ -27,7 +27,7 @@ public class PicoPerforador : Ability
         if (mouseTarget != Vector3.zero) 
         {
             Vector3 direction = player.move.MousePosition() - player.transform.position;
-            laVerdad.transform.position = player.move.MousePosition();
+            
             direction.Normalize();
             StartCoroutine(Descend(direction));
         }
@@ -101,16 +101,12 @@ public class PicoPerforador : Ability
     }
     private void OnDrawGizmos()
     {
-        //if (charging)
-        //{
+        if (charging)
+        {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position + transform.forward, detectionRadius);
-        //}
-        //else
-        //{
-        //    Gizmos.color = Color.green;
-        //    Gizmos.DrawWireSphere(transform.position + transform.forward * 1.7f, detectionRadius);
-        //}
+        }
+        
     }
 
 }

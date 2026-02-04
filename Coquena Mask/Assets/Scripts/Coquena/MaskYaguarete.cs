@@ -9,6 +9,7 @@ Tecla Espacio habilitado para esquivar (dash)
 */
 public class MaskYaguarete : Mask
 {
+    public AudioClip clipYaguareteAttack;
     float bleedDuration = 10f;
     float bleedDamagePerTick = 4f;
     float bleedTickInterval = 1f;
@@ -23,7 +24,7 @@ public class MaskYaguarete : Mask
             StartCoroutine(EnableHitCollider(attackDuration));
             nextAttackTime = Time.time;
             animator.SetTrigger("punch");
-
+            player.sounds.source.PlayOneShot(clipYaguareteAttack);
         }
         else
         {

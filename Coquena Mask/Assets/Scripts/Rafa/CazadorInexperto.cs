@@ -5,6 +5,8 @@ using System.Threading;
 
 public class CazadorInexperto : Enemy
 {
+    AudioSource source;
+    public AudioClip hitClip;
     public ZonaDeAlerta alertZone;
     EnemyHealthBar healthBar;
     public Animator animator;
@@ -46,6 +48,7 @@ public class CazadorInexperto : Enemy
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        source = GetComponent<AudioSource>();
         healthBar = GetComponentInChildren<EnemyHealthBar>();
         alertZone.RegistrarEnemigo(this);
         agent.isStopped = true;
@@ -273,6 +276,10 @@ public class CazadorInexperto : Enemy
         healthBar.damageAmount += (int)damage;
         healthBar.damageText.text = healthBar.damageAmount.ToString();
         healthBar.timer = 0;
+        if (!source.isPlaying) {
+            source.PlayOneShot(hitClip);
+        }
+        
         if (!healthBar.showDamage)
         {
             StartCoroutine(healthBar.ShowText());
