@@ -10,7 +10,7 @@ Embestida del espíritu del Monte: Embiste rápidamente un área seleccionada, haci
 */
 public class Masktapir : Mask
 {
-    
+    public AudioClip clipTapirAttack;
     Pisoton pisoton;
     EmbestidaEspiritu embestida;
     float stunDuration;
@@ -24,6 +24,7 @@ public class Masktapir : Mask
             StartCoroutine(EnableHitCollider(attackDuration));
             nextAttackTime = Time.time;
             animator.SetTrigger("punch");
+            player.sounds.source.PlayOneShot(clipTapirAttack);
             
         }
         else

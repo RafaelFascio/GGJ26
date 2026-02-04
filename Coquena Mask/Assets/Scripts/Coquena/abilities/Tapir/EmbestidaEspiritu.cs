@@ -8,6 +8,7 @@ public class EmbestidaEspiritu : Ability
    float chargeDuration = 1.2f;
    float chargeTimer = 0f;
    float chargeSpeed = 30f;
+   public AudioClip clipEmbestida;
     [HideInInspector]  public float chargeDamage ;
     [HideInInspector]  public float stunDuration ;
     CharacterController controller;
@@ -42,6 +43,7 @@ public class EmbestidaEspiritu : Ability
         direction = player.transform.forward;
         direction.y = 0;
         StartCoroutine(mask.EnableHitCollider(chargeDuration));
+        player.sounds.source.PlayOneShot(clipEmbestida);
         while (chargeTimer < chargeDuration && player.currentState != PlayerScript.State.Stunned)
         {
             controller.Move(chargeSpeed * Time.deltaTime * direction);
